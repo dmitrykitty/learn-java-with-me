@@ -9,5 +9,9 @@ public class TimeIntervalRunner {
         TimeInterval ti2 = new TimeInterval(1000);
         ti2.printTime();
         System.out.println(ti2.getTotalSeconds());
+
+        TimeInterval ti3 = ti.sum(ti2, ti);
+        ti3.printTime();
+        System.out.println(ti3.getTotalSeconds());
     }
 }

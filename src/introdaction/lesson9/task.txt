@@ -1,7 +1,13 @@
-1. Создать класс, описывающий промежуток времени.
-   Сам промежуток времени должен задаваться тремя свойствами:
-   секундами, минутами и часами.
-   Создать метод для получения полного количества секунд в объекте
-   Создать два конструктора: первый принимает общее количество
-   секунд, второй - часы, минуты и секунды по отдельности.
-   Создать метод для вывода данных.
+1. Create a class that describes a time interval.
+The time interval should be defined by three properties:
+seconds,
+minutes,
+and hours.
+
+Create a method to obtain the total number of seconds in the object.
+
+Create two constructors:
+the first one takes the total number of seconds,
+the second one takes hours, minutes, and seconds separately.
+
+Create a method to display the data.

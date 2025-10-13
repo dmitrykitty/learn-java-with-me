@@ -23,4 +23,8 @@ public class TimeInterval {
     public void printTime(){
         System.out.println(hours + ":" + minutes + ":" + seconds);
     }
+
+    public TimeInterval sum(TimeInterval ti1, TimeInterval ti2){
+        return new TimeInterval(ti1.getTotalSeconds() + ti2.getTotalSeconds());
+    }
 }
