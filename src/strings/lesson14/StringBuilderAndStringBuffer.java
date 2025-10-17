@@ -4,6 +4,8 @@ public class StringBuilderAndStringBuffer {
 
     static void main() {
         //StringBuilder - dynamiczny wektor
+        //StringBuffer - dynamiczny wektor, ale bezpieczny dla treadow (metody są synchronizowane -
+        // tylko jeden tread może wywołać metode)
         String value = "";
         long startTime = System.currentTimeMillis();
 
