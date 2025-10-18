@@ -1,7 +1,7 @@
 package oop.lesson2_inheritance_polimorfizm.task1;
 
 
-public abstract class Computer {
+public abstract class Computer implements Printable {
 
     private Ssd ssd;
     private Ram ram;
@@ -13,6 +13,7 @@ public abstract class Computer {
 
     public abstract void load();
 
+    @Override
     public void printState(){
         System.out.println("Ssd: " + ssd.getSize() + " Ram: " + ram.getSize());
     }
