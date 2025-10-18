@@ -1,4 +1,4 @@
-package oop.lesson1.task1;
+package oop.lesson1.task1_inheritance;
 
 public class Computer {
     private Ram ram;
@@ -7,6 +7,10 @@ public class Computer {
     public Computer(Ram ram, Ssd ssd){
         this.ram = ram;
         this.ssd = ssd;
+    }
+
+    public Computer(){
+        this(new Ram(16), new Ssd(128)); //wywołanie juz istniejacego konstruktora
     }
 
     public Ram getRam() {

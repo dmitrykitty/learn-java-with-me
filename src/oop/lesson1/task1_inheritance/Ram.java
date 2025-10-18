@@ -1,15 +1,19 @@
-package oop.lesson1.task1;
+package oop.lesson1.task1_inheritance;
 
-public class Ssd {
+public class Ram {
 
     private int size;
 
 
-    public Ssd(int size) {
+    public Ram(int size) {
         this.size = size;
     }
 
     public int getSize() {
         return size;
     }
+
+
+
+
 }
