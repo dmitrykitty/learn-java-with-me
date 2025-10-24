@@ -7,7 +7,7 @@ public class Mage extends Hero {
     }
 
     @Override
-    public void attackEnemy(Enemy enemy){
+    public void attackEnemy(Entity enemy){
         System.out.println(getName() + " casts fireball for " + getDamage() + " damage");
         enemy.takeDamage(getDamage());
     }

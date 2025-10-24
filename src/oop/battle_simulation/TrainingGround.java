@@ -11,15 +11,34 @@ public class TrainingGround {
         attack(enemy1, warr1, mage1, arch1);
     }
 
-    public static void attack(Enemy enemy, Hero... heroes){
-        while(enemy.isAlive())
+    public static void attack(Enemy enemy, Hero... heroes) {
+        int amount_of_alive_heroes = heroes.length;
+        while (enemy.isAlive()) {
             for (Hero hero : heroes) {
-                if(enemy.isAlive()) {
+                if (enemy.isAlive() && hero.isAlive()) {
                     hero.attackEnemy(enemy);
+                    if (enemy.isAlive()) {
+                        enemy.attackEnemy(hero);
+                    }
                     System.out.println("--------------------------------");
                 } else {
-                    break;
+                    if (!hero.isAlive()) {
+                        amount_of_alive_heroes--;
+                    }
                 }
             }
+            if (amount_of_alive_heroes == 0) {
+                break;
+            }
+        }
+
+        if (amount_of_alive_heroes == 0) {
+            System.out.println("Game over!!!\nAll heroes are dead!");
+        } else {
+            System.out.println("Game over!!!\nHeroes won");
+        }
+
+
+
     }
 }

@@ -11,18 +11,12 @@ public abstract class Entity implements Mortal {
     }
 
 
-    public void attackEnemy(Enemy enemy) {
-        System.out.println("Attacking for  " + getDamage() + " dmg!");
+    public void attackEnemy(Entity entity) {
+        System.out.println("Enemy attacking for  " + getDamage() + " dmg!");
+        entity.takeDamage(getDamage());
     }
 
-    public void takeDamage(int damage) {
-        health = health > damage ? health - damage : 0;
-        if(health > 0) {
-            System.out.println("After " + damage + " taken dmg only " + health + " hp left");
-        } else {
-            System.out.println("Enemy is dead");
-        }
-    }
+    public abstract void takeDamage(int damage);
 
     @Override
     public boolean isAlive() {
@@ -37,4 +31,7 @@ public abstract class Entity implements Mortal {
         return damage;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
 }

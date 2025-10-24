@@ -1,5 +1,5 @@
 package oop.battle_simulation;
 
 public interface Mortal {
-    boolean isAlive();
+    boolean isAlive(); //by default public abstract
 }
