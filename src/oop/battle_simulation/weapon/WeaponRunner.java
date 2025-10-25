@@ -19,20 +19,28 @@ public class WeaponRunner {
     public static <T extends Weapon> void printWeaponDamageByHero(Hero<T> hero) {
         System.out.println(hero.getWeapon().getDamage());
     }
-    public static void printWeaponDamageByHero2(Hero<? extends Weapon> hero){
+
+    public static void printWeaponDamageByHero2(Hero<? extends Weapon> hero) {
         //? extends Weapon oznacza, ze oczekuje sie jakis typ, ktory jest Weapon lub dowolnym go Derived.
         // Ograniczenie od góry
         //Producer - pozwala tylko produkowac(czytac) wartosci
         Weapon wp = hero.getWeapon(); //ok
-        hero.setWeapon(new Bow()); //bład - potrzebujemy konkretny typ
+        //hero.setWeapon(new Bow()); //bład - potrzebujemy konkretny typ
         System.out.println(hero.getWeapon().getDamage());
     }
-    public static void printWeaponDamageByHero3(Hero<? super Sword> hero){
+
+    public static void printWeaponDamageByHero3(Hero<? super Sword> hero) {
         //? super Sword oznacza, ze oczekuje sie jakis typ, ktory jest Sword lub go Base
         //ograniczenie od dolu
         //Consumer - pozwala tylko uzywac(modyfikowac) wartosci
-        Sword wp = hero.getWeapon(); //bład, bo mozemy dostac i coś wyzej
+        //Sword wp = hero.getWeapon(); //bład, bo mozemy dostac i coś wyzej
         hero.setWeapon(new Sword()); //ok
         System.out.println(hero.getWeapon().getDamage());
+
+        /*
+        Если у нас есть иерархия классов (Integer <- Number <- Object), то поставив ? super Number
+        мы можем использовать Number и объекты более верхнего уровня (Object).
+        Если же поставим ? extends Number, то Number и объекты ниже в иерархии наследования, т.е. Integer
+         */
     }
 }
