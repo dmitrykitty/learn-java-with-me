@@ -1,7 +1,10 @@
 package oop.battle_simulation;
 
-public abstract class Hero extends Entity{
-    private String name;
+import oop.battle_simulation.weapon.Weapon;
+
+public abstract class Hero<T extends Weapon> extends Entity{
+    private final String name;
+    private T weapon;
 
     public Hero(String name, int health, int damage) {
         super(health, damage);
@@ -24,5 +27,13 @@ public abstract class Hero extends Entity{
         } else {
             System.out.println(getName() + " is dead");
         }
+    }
+
+    public T getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(T weapon) {
+        this.weapon = weapon;
     }
 }

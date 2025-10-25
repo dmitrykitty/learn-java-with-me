@@ -1,6 +1,9 @@
 package generics.lesson1;
 
-public class MyArray<T> {
+import oop.battle_simulation.Hero;
+
+public class MyArray<T extends Hero> {
+    //teraz moge dodawac tylko hero
     private T[] array;
     private int size;
     private int capacity;

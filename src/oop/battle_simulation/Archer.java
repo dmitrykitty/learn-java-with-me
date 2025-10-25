@@ -1,6 +1,8 @@
 package oop.battle_simulation;
 
-public class Archer extends Hero {
+import oop.battle_simulation.weapon.RangeWeapon;
+
+public class Archer<T extends RangeWeapon> extends Hero<T> {
     public Archer(String name, int health, int damage) {
         super(name, health, damage);
     }
