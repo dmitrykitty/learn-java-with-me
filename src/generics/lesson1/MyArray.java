@@ -2,7 +2,9 @@ package generics.lesson1;
 
 import oop.battle_simulation.Hero;
 
-public class MyArray<T extends Hero> {
+import java.util.Iterator;
+
+public class MyArray<T> implements Iterable<T>{
     //teraz moge dodawac tylko hero
     private T[] array;
     private int size;
@@ -13,6 +15,27 @@ public class MyArray<T extends Hero> {
         this.capacity = capacity;
         this.array = (T[])new Object[capacity];
     }
+
+    private class MyIterator implements Iterator<T>{
+        private int index;
+
+        @Override
+        public boolean hasNext() {
+            return index < size;
+        }
+
+        @Override
+        public T next() {
+            return array[index++];
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+
+
     public void resize(int newSize){
         if(newSize <= capacity){
             return;
@@ -38,4 +61,6 @@ public class MyArray<T extends Hero> {
     public int getSize(){
         return size;
     }
+
+
 }
