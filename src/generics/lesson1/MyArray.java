@@ -21,7 +21,7 @@ public class MyArray<T> implements Iterable<T>{
 
         @Override
         public boolean hasNext() {
-            return index < size;
+            return index < capacity;
         }
 
         @Override

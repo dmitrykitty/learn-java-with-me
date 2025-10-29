@@ -27,6 +27,15 @@ public class Person {
         return Objects.hash(id, firstName, age);
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public int getId() {
         return id;
     }
