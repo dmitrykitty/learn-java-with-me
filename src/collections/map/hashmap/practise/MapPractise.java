@@ -1,11 +1,9 @@
-package collections.map.practise;
+package collections.map.hashmap.practise;
 
 import collections.equalsandhashcode.lesson1.Person;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class MapPractise {
     static void main() {

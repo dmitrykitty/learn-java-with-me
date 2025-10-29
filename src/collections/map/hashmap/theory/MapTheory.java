@@ -1,4 +1,4 @@
-package collections.map.theory;
+package collections.map.hashmap.theory;
 
 import java.util.Collection;
 import java.util.HashMap;

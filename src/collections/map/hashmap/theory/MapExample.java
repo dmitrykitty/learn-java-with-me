@@ -1,4 +1,4 @@
-package collections.map.theory;
+package collections.map.hashmap.theory;
 
 import collections.equalsandhashcode.lesson1.Person;
 
