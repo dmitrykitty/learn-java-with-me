@@ -2,12 +2,24 @@ package collections.equalsandhashcode.lesson1;
 
 import java.util.Objects;
 
-public class Person {
+public class Person implements Comparable<Person>{
 
     private final int id;
     private String firstName;
     private int age;
 
+
+    @Override
+    public int compareTo(Person o) {
+        return Integer.compare(this.id, o.id);
+//        if(this.id == o.id){
+//            return 0;
+//        } else if(this.id > o.id){
+//            return 1;
+//        } else {
+//            return -1;
+//        }
+    }
 
     public Person(int id, String firstName, int age) {
         this.id = id;
