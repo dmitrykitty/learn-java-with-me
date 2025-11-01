@@ -1,0 +1,21 @@
+Zadanie 1:
+Napisz metodę, która przyjmuje listę liczb całkowitych i zwraca nową listę,
+zawierającą tylko te liczby, które są nieparzyste.
+
+Zadanie 2:
+Napisz metodę `countUnique`, która przyjmuje listę liczb całkowitych jako parametr i zwraca liczbę unikalnych wartości
+w tej liście. Metoda powinna zwrócić 0 dla pustej listy.
+Przykład: dla listy [3, 7, 3, -1, 2, 3, 7, 2, 15, 15] metoda powinna zwrócić 5.
+
+Zadanie 3:
+Napisz metodę `isUnique`, która przyjmuje `Map<String, String>` i zwraca `true`, jeśli każda wartość (value)
+w mapie jest unikalna (nie powtarza się).
+Przykład dla `true`: {Marty=Stepp, Stuart=Reges, Jessica=Miller, Amanda=Camp, Hal=Perkins}
+Przykład dla `false`: {Kendrick=Perkins, Stuart=Reges, Jessica=Miller, Bruce=Reges, Hal=Perkins}
+(wartości "Perkins" i "Reges" się powtarzają)
+
+Zadanie 4:
+Zaimplementuj dodawanie dwóch wielomianów. Wielomiany są reprezentowane przez `HashMap<Integer, Integer>`,
+gdzie klucz to stopień potęgi, a wartość to współczynnik.
+Napisz metodę, która przyjmuje dwie takie mapy i zwraca trzecią (wynikową) mapę.
+Dodatkowo napisz metodę, która przyjmuje mapę wynikową i formatuje ją do postaci tekstowej, np.: "ax^6 + bx^4 + cx^3 + dx + 8".

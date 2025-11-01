@@ -1,6 +1,6 @@
-package collections.treemap;
+package collections.map.treemap;
 
-import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.TreeMap;

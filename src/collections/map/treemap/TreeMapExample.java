@@ -1,4 +1,4 @@
-package collections.treemap;
+package collections.map.treemap;
 
 import collections.equalsandhashcode.lesson1.Person;
 
