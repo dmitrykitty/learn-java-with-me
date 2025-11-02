@@ -6,9 +6,7 @@ public class ArrayUtils {
     private ArrayUtils() {}
 
     public static int countUniqueNumbers(List<Integer> numbers){
-        int startSize = numbers.size();
-        Set<Integer> set = new HashSet<>(numbers);
-        return startSize - set.size();
+        return new HashSet<>(numbers).size();
     }
 
     public static int getNotRepeatedNumbersCount(List<Integer> numbers){
