@@ -1,7 +1,4 @@
 package collections.bigpractise.practise1.task4;
-
-import collections.bigpractise.practise1.task3.MapUtils;
-
 import java.util.Map;
 
 public class Task4Runner {

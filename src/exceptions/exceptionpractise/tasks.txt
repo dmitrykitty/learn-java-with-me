@@ -1,0 +1,14 @@
+1.Zadeklaruj zmienną o wartości null. Wywołaj metodę na tej zmiennej. Złap powstały wyjątek.
+
+2.Napisz kod, który spowoduje, a następnie złapie wyjątek ArrayIndexOutOfBoundsException.
+
+3.Stwórz własną klasę wyjątku, dziedziczącą po klasie Exception. Stwórz metodę rzucającą ten wyjątek. Wywołaj tę metodę i złap wyjątek. Wyświetl stack trace na konsolę.
+
+4.Powtórz poprzednie ćwiczenie, ale dziedzicząc swoją klasę po RuntimeException. Dodaj do konstruktora swojej klasy wyjątku możliwość przekazania wiadomości (komunikatu).
+
+5.Rzuć jednym z istniejących w JDK wyjątków, złap go, a następnie rzuć swoim własnym wyjątkiem, ustawiając złapany wyjątek jako jego "przyczynę" (cause).
+
+6.Stwórz metodę, która losowo rzuca jednym z 3 różnych typów wyjątków. Wywołaj tę metodę w bloku try-catch, który łapie każdy z tych 3 typów.
+
+7.Napisz metodę, która w 50% przypadków rzuca wyjątek.
+Wywołaj tę metodę w konstrukcji try-catch-finally. Przetestuj działanie bloku finally.
