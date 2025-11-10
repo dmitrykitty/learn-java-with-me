@@ -18,6 +18,10 @@ public class User extends Person implements Serializable, Comparable<User> {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "User{" +

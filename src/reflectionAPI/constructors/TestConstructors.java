@@ -58,6 +58,11 @@ public class TestConstructors {
     private static void testMethods(User user) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method methodGetName = user.getClass().getDeclaredMethod("getName"); //->dostajemy method getName()
         System.out.println(methodGetName.invoke(user)); //->wywołujemy ten method przekazujac mu object method.invoke(obj)
+
+        Method methodSetName = User.class.getDeclaredMethod("setName", String.class);
+        methodSetName.invoke(user, "Krisik");
+        System.out.println(methodGetName.invoke(user));
+
     }
 
 }
