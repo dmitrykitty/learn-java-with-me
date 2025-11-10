@@ -8,7 +8,7 @@ import java.lang.reflect.*;
 public class TestConstructors {
     static void main() {
 
-        User user1 = new User(25L, "Dima");
+        User user1 = new User(25L, "Dima", 32);
         Class<User> userClass = User.class;
 
         try {

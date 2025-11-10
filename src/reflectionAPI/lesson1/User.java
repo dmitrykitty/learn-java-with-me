@@ -1,12 +1,21 @@
 package reflectionAPI.lesson1;
 
+import reflectionAPI.annotations.MinAge;
+
 import java.io.Serializable;
 
 public class User extends Person implements Serializable, Comparable<User> {
+
     private String name;
-    public User(long id, String name) {
+    @MinAge
+    //@MinAge(age=21) - gdyby nie było default age in annotation
+    //@Minage(20) - gdyby imię metod w annotacji było value(zarezerwowane)
+    private int age;
+
+    public User(long id, String name, int age) {
         this.name = name;
         super(id);
+        this.age = age;
     }
 
     @Override

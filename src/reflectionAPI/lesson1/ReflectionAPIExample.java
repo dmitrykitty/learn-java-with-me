@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ReflectionAPIExample {
     static void main() {
-        User user1 = new User(25L, "Dima");
+        User user1 = new User(25L, "Dima", 32);
         Class<? extends User> user1Class = user1.getClass();
         Class<User> userClass = User.class; //same result
 
