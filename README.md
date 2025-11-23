@@ -1,131 +1,106 @@
-# Java Learning Repository
+# Java Learning Path
 
-A comprehensive repository documenting my self-guided journey in learning Java, featuring practical implementations and exercises across various core Java concepts.
-
----
-
-##  Overview
-
-This repository contains organized packages demonstrating my progression through Java fundamentals to advanced topics. Each package includes practical examples, exercises, and implementations showcasing different aspects of the language.
+A comprehensive repository documenting my self-guided journey in mastering Java. This project contains practical implementations, algorithmic challenges, and mini-projects that demonstrate key language mechanisms and best practices.
 
 ---
 
-##  Project Structure
+## Overview
 
-### Collections Framework
-- **Lists**: ArrayList and LinkedHashMap implementations with performance comparisons
-- **Maps**: HashMap, LinkedHashMap, and TreeMap examples with practical use cases
-- **Sets**: HashSet, LinkedHashSet, and TreeSet demonstrations
-- **Sorting**: Custom comparators and sorting algorithms
-- **Iterators**: Iterator pattern implementations and best practices
-- **Equals & HashCode**: Proper implementation examples
-
-**Highlights**:
-- Cinema management system (Film/Actor relationships)
-- Polynomial operations using collections
-- Chat and user management systems
-
-### Object-Oriented Programming (OOP)
-- **Inheritance & Polymorphism**: Class hierarchies and method overriding
-- **Abstract Classes**: Abstract class design patterns
-- **Interfaces**: Multiple interface implementations
-- **Enums**: Type-safe enumeration patterns
-- **Battle Simulation**: Complete RPG-style combat system featuring:
-    - Hero classes (Warrior, Mage, Archer)
-    - Weapon systems with generics
-    - Enemy AI and combat mechanics
-
-### Functional Programming
-- **Lambda Functions**: Functional interfaces and lambda expressions
-- **Streams API**: Stream operations, mapping, filtering, and reducing
-- **Optional**: Safe null handling patterns
-- **Map-Reduce**: Parallel processing examples
-
-### Generics
-- **Generic Classes**: Type-safe custom data structures
-- **Generic Methods**: Utility methods with type parameters
-- **Bounded Types**: Wildcard usage and type restrictions
-- **Custom Array Implementation**: Generic iterable array
-
-### Exception Handling
-- **Custom Exceptions**: Creating and using custom exception types
-- **Try-Catch-Finally**: Proper exception handling patterns
-- **Exception Chaining**: Wrapping and propagating exceptions
-
-### Strings & StringBuilder
-- **String Manipulation**: Various string operations and algorithms
-- **StringBuilder/StringBuffer**: Performance comparisons
-- **Practical Tasks**: Palindrome checker, unique character finder
-
-### Reflection API
-- **Runtime Introspection**: Examining class structures at runtime
-- **Constructor/Method Access**: Dynamic invocation
-- **Field Manipulation**: Accessing and modifying private fields
+The project is organized into thematic packages representing a progression from Object-Oriented Programming fundamentals to Collections and Functional Programming, reaching advanced topics like the Reflection API and Input/Output (I/O) operations.
 
 ---
 
-## Key Learning Projects
+## Project Structure
 
-### 1. Battle Simulation System
-Complete RPG-style combat system with:
-- Multiple hero types with unique abilities
-- Generic weapon system
-- Polymorphic combat mechanics
-- Interface-based design
+### 1.  Object-Oriented Programming (OOP)
+Practical application of the four pillars of OOP.
+* **Battle Simulation (RPG)**: A complex combat system.
+    * Abstract `Hero` class and concrete implementations (`Warrior`, `Mage`, `Archer`).
+    * **Generic Weapon System**: Heroes are typed by the weapon they wield (`Hero<T extends Weapon>`).
+    * Interfaces: `Mortal`, `RangeWeapon`, `MeleeWeapon`, `MagicWeapon`.
+    * Combat logic and object interaction (`TrainingGround`).
+* **Geometry (Figures)**: Polymorphism in practice.
+    * Abstract `Shape` class and interfaces like `WithPerimeter` and `Internal` (checking if a point lies inside a shape).
+    * Implementations: `Circle`, `Rectangle`.
+* **Inheritance & Composition**:
+    * Computer hardware hierarchy (`Computer` -> `Laptop`, `Mobile`).
+    * ATM simulation (`Bankomat`) with banknote management logic.
+* **Enums**: Enumerations with abstract methods (`ProcessorType`).
 
-### 2. Cinema Management System
-Film and actor relationship management featuring:
-- Bidirectional relationships
-- Advanced filtering and sorting
-- Stream API usage
-- Collection manipulation
+### 2. Collections Framework
+Working with data structures and algorithms.
+* **Cinema Management System**:
+    * Bidirectional relationships between `Film` and `Actor`.
+    * Advanced filtering (by year, genre, actors) and sorting.
+* **Polynomial Operations**:
+    * Representation of polynomials as `Map<Integer, Integer>` (power -> coefficient).
+    * Logic for adding polynomials and formatting them into readable strings (e.g., `ax^2 + bx + c`).
+* **Lists, Sets, and Maps**:
+    * Performance comparison: `ArrayList` vs `LinkedList`.
+    * Custom comparators (`StudentAgeComparator`, `ChatUsersAmountComparator`).
+    * Usage of `TreeMap` and `LinkedHashMap` (e.g., implementation of an LRU Cache).
 
-### 3. Custom Generic Data Structures
-- Type-safe array implementation
-- Iterator pattern
-- Generic utility methods
+### 3. Java I/O (Input/Output)
+File operations and data streams.
+* **Text Analysis**:
+    * Finding words starting with a vowel.
+    * Finding word chains (last letter of a word = first letter of the next).
+    * Counting the maximum sequence of digits in a text.
+* **File Modification**:
+    * `CodeEditor`: A program that reads a `.java` file and changes access modifiers from `public` to `private`.
+    * `TextEditor`: Reversing text in files line by line.
+* **Streams vs Readers**: Examples using `FileInputStream`, `BufferedReader`, `Scanner`, and the `Files` class.
+
+### 4. Reflection API & Annotations
+Introspection and metaprogramming.
+* **Mini-ORM (Object-Relational Mapping)**:
+    * Custom annotations: `@Table` and `@Column`.
+    * `DataBaseUtils` class: Dynamically generates SQL `INSERT INTO...` queries based on object fields using reflection.
+* **Validation**:
+    * Custom annotation `@MinAge`.
+    * Runtime object validator (`AnnotationValidator`).
+* **Exploration**: Dynamic instantiation, accessing private fields and methods.
+
+### 5. Functional Programming
+Modern data processing (Java 8+).
+* **Stream API**:
+    * Filtering, mapping, sorting, and reducing (`reduce`).
+    * Working with `Optional` to avoid `NullPointerException`.
+    * Data grouping (`Collectors.groupingBy`) and statistics (`IntSummaryStatistics`).
+* **Functional Interfaces**: Lambda expressions, Method References.
+
+### 6. Generics
+Writing flexible and type-safe code.
+* **Custom Data Structure**: `MyArray<T>` class – a dynamic array implementing the `Iterable` interface.
+* **Pair Class**: A universal container for a pair of objects with a `swap` method.
+
+### 7. Exception Handling
+Error management.
+* Creating custom exceptions (`MyException`).
+* Exception hierarchy (Checked vs Unchecked).
+* Practice with `try-catch-finally` blocks and `try-with-resources`.
+
+### 8. Strings
+Text manipulation.
+* Algorithms: Palindrome checking, finding unique characters.
+* Performance: `String` vs `StringBuilder` (benchmarking).
 
 ---
 
-## Technologies & Concepts
+## Key Educational Projects
 
-- **Java Version**: Java 25
-- **Build Tool**: IntelliJ IDEA project
-- **Key Concepts**:
-    - Collections Framework
-    - Object-Oriented Design
-    - Functional Programming
-    - Generics
-    - Exception Handling
-    - Reflection API
-    - Stream API
+1.  **RPG Battle Simulator**
+    * *Goal*: Understanding polymorphism, abstract classes, and generics.
+    * *Description*: A system allowing team battles where every hero (Warrior, Mage, Archer) has a unique weapon type and attack method.
 
----
+2.  **Mini-ORM (Reflection API)**
+    * *Goal*: Practical application of reflection and annotations.
+    * *Description*: A tool that converts Java objects into SQL queries. It automatically maps class names and fields to database tables and columns.
 
-## Learning Approach
+3.  **Cinema Management System**
+    * *Goal*: Mastering Collections and Stream API.
+    * *Description*: A system managing a database of films and actors, handling complex queries (e.g., "Find top 10 Drama movies starring Actor X").
 
-Each package follows a structured learning path:
-1. **Theory**: Basic examples and cheat sheets
-2. **Practice**: Hands-on exercises
-3. **Projects**: Comprehensive implementations combining multiple concepts
-
----
-
-## Getting Started
-
-1. Clone the repository with `git clone git@github.com:dmitrykitty/learn-java-with-me.git`
-
-2. Open in IntelliJ IDEA (or your preferred Java IDE)
-
-3. Navigate to specific packages to explore different concepts
-
-4. Run the `*Runner` classes to see examples in action
-
----
-
-## Notes
-
-- Most runner classes contain `static void main()` methods for demonstration
-- Code emphasizes learning and experimentation over production-ready patterns
-- Each package contains its own examples and exercises
-- This is a personal learning repository showcasing my self-study approach to mastering Java programming.
+4.  **Java Code Editor (I/O)**
+    * *Goal*: File operations.
+    * *Description*: A utility that parses Java source files and modifies code structure (e.g., changing access modifiers) directly within the files.
