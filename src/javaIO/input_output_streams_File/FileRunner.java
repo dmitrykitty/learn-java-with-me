@@ -15,9 +15,9 @@ public class FileRunner {
         System.out.println(file.getName());
         System.out.println(file.getParent());
         System.out.println(file.length()); //size
-        //can execute() - czy mozemy wykonywac
-        //can read() - czy mozemy odczytywac
-        //can write() - czy mozemy zmieniac
+        //canExecute() - czy mozemy wykonywac
+        //canRead() - czy mozemy odczytywac
+        //canWrite() - czy mozemy zmieniac
 
         System.out.println(file.canExecute());
         System.out.println(file.getAbsolutePath()); //D:\study\AGH\JAVA_NEW\course_2\resources\test.txt
