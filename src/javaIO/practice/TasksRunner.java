@@ -22,7 +22,7 @@ public class TasksRunner {
         }
         Path path2 = Path.of("resources", "test2.txt");
         try{
-            CountNums.countNumsAmountInEachLine(path2);
+            Counter.countNumsAmountInEachLine(path2);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -39,6 +39,12 @@ public class TasksRunner {
         try{
             TextEditor.reverseText(path3, Path.of("resources", "test3.java") );
         } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+        try{
+            Counter.countLettersFrequency(path2, Path.of("resources", "test4.txt"));
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
