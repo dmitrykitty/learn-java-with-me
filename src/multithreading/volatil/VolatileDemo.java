@@ -5,7 +5,7 @@ package multithreading.volatil;
  * <p>
  * <strong>Why is {@code volatile} required here?</strong>
  * <p>
- * Without the {@code volatile} keyword, the Java Memory Model (JMM) does not guarantee
+ * Without the {@code volatile} keyword, the Java Memory Model (JMM)(heap) does not guarantee
  * that the change made to {@code flag} by {@code thread2} will be immediately visible
  * to {@code thread1}. This results in an infinite loop (livelock) for two main reasons:
  * <ul>
