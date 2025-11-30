@@ -26,7 +26,7 @@ public class BuyerThread implements Runnable {
                         // We remove the element. The NoSuchElementException is prevented here
                         // because no other thread can remove an item between isEmpty() and remove().
                         CashBox cashBox = cashboxes.remove();
-                        System.out.println(Thread.currentThread().getName() + ": cashbox N" + cashBox);
+                        System.out.println(Thread.currentThread().getName() + ": " + cashBox);
 
 
                         // 4. SIMULATING WORK (Using wait with timeout)
@@ -36,9 +36,9 @@ public class BuyerThread implements Runnable {
                         //
                         // Note: If we used 'Thread.sleep(5L)', the lock would NOT be released,
                         // blocking all other threads even while this one is sleeping.
-                        cashboxes.wait(5L); //wait used only inside synchronized method
+                        cashboxes.wait(1000L); //wait used only inside synchronized method
 
-                        System.out.println(Thread.currentThread().getName() + ": cashbox N" + cashBox + " is free");
+                        System.out.println(Thread.currentThread().getName() + ": " + cashBox + " is free");
                         // 5. RETURNING RESOURCE
                         // We add the cashbox back to the queue.
                         cashboxes.add(cashBox);

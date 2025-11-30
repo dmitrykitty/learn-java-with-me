@@ -1,0 +1,34 @@
+You have a LinkedList acting as storage for integers. A ProducerThread infinitely adds random integers to this list at
+certain intervals, however, the maximum number of elements the list can hold is 10.
+
+A ConsumerThread infinitely retrieves numbers from the list with a random delay (between 0 and 10 ms).
+
+Implement the logic such that the produce method adds numbers only when the limit (10) is not exceeded,
+and the consume method retrieves them only when the list contains at least one element.
+Both methods must work correctly in a multithreaded environment (thread-safe).
+
+Create and start two separate threads: one executing produce and the other executing consume.
+Demonstrate the correctness of the storage operations by printing messages to the console regarding adding items,
+retrieving items, and the current storage size during these operations.
+
+Objective: Implement a thread-safe Producer-Consumer pattern using a LinkedList.
+Requirements:
+
+    Storage: Use a LinkedList<Integer> to store the values.
+
+    Producer: Create a ProducerThread that infinitely adds random numbers to the list.
+        Constraint: The maximum capacity of the list is 10. The producer must wait if the list is full.
+
+    Consumer: Create a ConsumerThread that infinitely retrieves numbers from the list.
+        Constraint: The consumer must wait if the list is empty.
+        Delay: The consumer should have a random delay between 0 and 10 ms.
+
+    Concurrency: Ensure the produce and consume methods are thread-safe and handle synchronization
+    correctly (e.g., using wait() and notify()).
+
+    Execution: Create and start both threads simultaneously.
+
+    Logging: Print console messages for every operation to demonstrate correctness:
+        When an item is added.
+        When an item is retrieved.
+        The current size of the storage after each operation.
