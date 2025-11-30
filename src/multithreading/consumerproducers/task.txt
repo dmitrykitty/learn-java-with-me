@@ -11,6 +11,8 @@ Create and start two separate threads: one executing produce and the other execu
 Demonstrate the correctness of the storage operations by printing messages to the console regarding adding items,
 retrieving items, and the current storage size during these operations.
 
+
+
 Objective: Implement a thread-safe Producer-Consumer pattern using a LinkedList.
 Requirements:
 
