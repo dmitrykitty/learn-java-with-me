@@ -1,4 +1,4 @@
-package com.dnikitin.internal.socket;
+package com.dnikitin.internal.serversocket;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

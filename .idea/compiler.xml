@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="java-fundamentals" />
         <module name="java-network" />
+        <module name="java-testing" />
       </profile>
     </annotationProcessing>
   </component>
