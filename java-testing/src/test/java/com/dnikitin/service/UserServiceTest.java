@@ -2,9 +2,12 @@ package com.dnikitin.service;
 
 import com.dnikitin.dto.User;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -86,7 +89,8 @@ public class UserServiceTest {
         //we can run tests by tag
         //mvn clean test -pl module-name -Dgroups=exception
     void throwsExceptionIfUserIsNull() {
-        assertThrows(NullPointerException.class, () -> userService.add(null));
+        NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> userService.add(null));
+        assertEquals("lalala", nullPointerException.getMessage());
         //or using asserJ
         assertThatThrownBy(() -> userService.add(null))
                 .isInstanceOf(NullPointerException.class)
@@ -103,6 +107,56 @@ public class UserServiceTest {
         //using assertj to check are array elements correct
         assertThat(users).containsExactlyInAnyOrderElementsOf(List.of(MARRY, JOHN));
     }
+    //========================PARAMETERIZED TEST===============================
+
+    @ParameterizedTest(name = "{index} - Check user: {0}") // Customizes display name: {index} is current run, {0} is the first argument
+    // @NullSource // Adds 'null' to the stream of arguments
+    // @EmptySource // Adds empty string/collection. Does not work for primitives like int
+    @NullAndEmptySource // Combines @NullSource and @EmptySource (best practice for Strings)
+    @ValueSource(strings = {
+            "Marry", "John", "admin"
+    }) // Provides a simple array of values (Strings, ints, etc.)
+    void checkUserNames(String username) {
+        // In a parameterized test, this logic runs once for EVERY argument provided above
+        // 1. null
+        // 2. "" (empty)
+        // 3. "Marry"
+        // 4. "John"
+        // ...
+
+        // Example logic:
+        boolean exists = userService.getUserByName(username).isPresent();
+        // assertions...
+    }
+
+    @ParameterizedTest(name = "[{index}] Search for {0}, expect user: {1}")
+    // Connects to a static method that returns a Stream of Arguments.
+    // Ideally, the method name matches the test name, but "value" allows specifying a custom method name.
+    @MethodSource("getArgsForAddingTest")
+        // @CsvSource({ "Pit, 123", "John, 321" }) // Alternative: Passing multiple arguments as CSV strings directly
+        // @CsvFileSource(resources = "/users.csv", numLinesToSkip = 1) // Alternative: Loading data from an external file
+    void addingParametrizedTest(String username, User expectedUser) {
+        // Given
+        userService.add(expectedUser);
+
+        // When
+        var maybeUser = userService.getUserByName(username);
+
+        // Then
+        assertThat(maybeUser).isPresent();
+        assertThat(maybeUser.get()).usingRecursiveComparison().isEqualTo(expectedUser);
+    }
+
+    // Static method providing arguments stream.
+    // Must be static unless the test class is annotated with @TestInstance(PER_CLASS).
+    static Stream<Arguments> getArgsForAddingTest() {
+        return Stream.of(
+                // Arguments.of() maps values to the test method parameters in order
+                Arguments.of("Pit", new User("Pit", "123")),
+                Arguments.of("John", new User("John", "321"))
+        );
+    }
+    //=========================================================================
 
     @AfterEach
     void deleteDataFromDatabase() {

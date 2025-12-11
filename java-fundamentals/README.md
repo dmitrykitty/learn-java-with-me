@@ -1,10 +1,4 @@
-# Java Learning Path
-
-A comprehensive repository documenting my self-guided journey in mastering Java. This project contains practical implementations, algorithmic challenges, and mini-projects that demonstrate key language mechanisms and best practices.
-
----
-
-## Overview
+# Overview
 
 The project is organized into thematic packages representing a progression from Object-Oriented Programming fundamentals to Collections and Functional Programming, reaching advanced topics like the Reflection API and Input/Output (I/O) operations.
 
