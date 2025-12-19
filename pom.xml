@@ -9,6 +9,7 @@
         <module>java-fundamentals</module>
         <module>java-network</module>
         <module>java-testing</module>
+        <module>java-jdbc</module>
     </modules>
     <version>1.0-SNAPSHOT</version>
 

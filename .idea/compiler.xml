@@ -9,6 +9,7 @@
         <module name="java-fundamentals" />
         <module name="java-network" />
         <module name="java-testing" />
+        <module name="java-jdbc" />
       </profile>
     </annotationProcessing>
   </component>

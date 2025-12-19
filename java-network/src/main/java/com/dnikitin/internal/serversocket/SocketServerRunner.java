@@ -10,9 +10,9 @@ public class SocketServerRunner {
     static void main() {
         //params - port, backlog(amount of connections we can keep)
         try (ServerSocket serverSocket = new ServerSocket(7777);
-             //wait until client connect to the server
+             //wait until client connect to the server and give back connected client
              var socket = serverSocket.accept();
-             var output = new DataOutputStream(socket.getOutputStream());
+             var output = new DataOutputStream(socket.getOutputStream());//we ca wrap it with BufferedReader instead Data
              var input = new DataInputStream(socket.getInputStream());
              var scanner = new Scanner(System.in);
         ) {
