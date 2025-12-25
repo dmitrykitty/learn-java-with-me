@@ -1,4 +1,4 @@
-package com.dnikitin.servlet.servletintro;
+package com.dnikitin.servlet;
 
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
