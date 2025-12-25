@@ -21,13 +21,23 @@ public class DownloadServlet extends HttpServlet {
     //===================DOWNLOADING FILE FROM SERVER======================
     //to download file -> header Content-Disposition, attachment, filename
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setHeader("Content-Disposition", "attachment; filename=\"filename.json\"");
-        resp.setContentType("application/json");
+        //get parameter with the type of file
+        String fileId = req.getParameter("fileId");
+
+        //setting mime type
+        String mimeType = this.getServletContext().getMimeType(fileId);
+        if(mimeType == null) {
+            mimeType = "application/octet-stream";
+        }
+
+
+        resp.setHeader("Content-Disposition", "attachment; filename=\"" + fileId + "\"");
+        resp.setContentType(mimeType);
         resp.setCharacterEncoding("UTF-8");
 
         try (ServletOutputStream outputStream = resp.getOutputStream();
              //to get file from resourses by name
-             InputStream resourceAsStream = DownloadServlet.class.getClassLoader().getResourceAsStream("first.json")) {
+             InputStream resourceAsStream = DownloadServlet.class.getClassLoader().getResourceAsStream(fileId)) {
 
             if (resourceAsStream != null) {
                 resourceAsStream.transferTo(outputStream);
