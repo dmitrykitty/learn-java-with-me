@@ -1,8 +1,0 @@
-In text figures, the shape and positioning of the numerals vary as those of lowercase letters do.
-In the most common scheme, 0, 1, and 2 are of x-height, having neither ascenders nor descenders;
-6 and 8 have ascenders; and 3, 4, 5, 7, and 9 have descenders. Other schemes exist;
-for example, the types cut by the Didot family of punchcutters and typographers in France between the late 18th
-and early 19th centuries typically had an ascending 3 and 5, a form preserved in some later French typefaces.
-A few other typefaces used different arrangements, notably on 4, which may have an ascender in addition or instead of
-a descender, as in Theano Didot. Sometimes the stress of the 0 is made different from a letter o in some way, although
-many fonts do not do this.[6][7]
