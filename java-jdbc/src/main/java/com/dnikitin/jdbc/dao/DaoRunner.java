@@ -5,10 +5,30 @@ import com.dnikitin.jdbc.dao.ticketdao.TicketDaoJDBC;
 import com.dnikitin.jdbc.entity.TicketEntity;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Optional;
 
 public class DaoRunner {
     public static void main(String[] args) {
-        deleteTest();
+    }
+
+    private static void findAllTest() {
+        TicketDao ticketDao = TicketDaoJDBC.getInstance();
+        ticketDao.findAll().forEach(System.out::println);
+    }
+
+    private static void findByIdAndUpdateTest() {
+        TicketDao ticketDao = TicketDaoJDBC.getInstance();
+        Optional<TicketEntity> ticketById = ticketDao.findById(2L);
+        System.out.println(ticketById);
+
+        ticketById.ifPresent(ticket -> {
+            ticket.setCost(BigDecimal.valueOf(192.50));
+            boolean updated = ticketDao.update(ticket);
+            if (updated) {
+                System.out.println("Ticket with " + ticket.getId() + " was updated");
+            }
+        });
     }
 
     private static void deleteTest() {
