@@ -2,5 +2,8 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/creatingDB/flights.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/creatingDB/workingWithDB.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/flightRepo2/coursePractise.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/flightRepo2/creating.sql" dialect="PostgreSQL" />
   </component>
 </project>
