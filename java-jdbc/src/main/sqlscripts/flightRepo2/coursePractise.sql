@@ -62,9 +62,13 @@ from ticket
 group by passenger_no, passenger_name
 order by tickets_amounts desc;
 
+
 -- Task 7: List the costs of all routes in descending order. Display the price difference
 -- between the current route and the subsequent routes in the sorted list.
-select f.flight_no, f.departure_airport_code || ' -> ' || f.arrival_airport_code route, t.cost,
-       t.cost - lead(t.cost) over (order by t.cost desc) diff
+select f.flight_no,
+       f.departure_airport_code || ' -> ' || f.arrival_airport_code route,
+       round(avg(t.cost), 2) avg,
+       round(coalesce(avg(t.cost) - lead(avg(t.cost)) over (order by avg(t.cost) desc), 0), 2) diff
 from flight f join ticket t on f.id = t.flight_id
-order by t.cost desc;
+group by f.flight_no, f.departure_airport_code, f.arrival_airport_code
+order by avg desc;
