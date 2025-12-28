@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="java-network-web" />
+        <module name="java-algos" />
         <module name="java-fundamentals" />
         <module name="java-network" />
         <module name="java-testing" />
