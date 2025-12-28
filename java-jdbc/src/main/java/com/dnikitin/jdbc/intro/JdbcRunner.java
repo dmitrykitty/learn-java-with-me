@@ -71,9 +71,6 @@ public class JdbcRunner {
                         + " "
                         + resultSet.getString("last_name"));
             }
-
-
         }
-
     }
 }

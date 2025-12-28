@@ -1,4 +1,4 @@
-package com.dnikitin.jdbc.sqlinjection;
+package com.dnikitin.jdbc.intro.sqlinjection;
 
 import com.dnikitin.jdbc.util.ConnectionManager;
 
@@ -63,6 +63,8 @@ public class SqlInjectionExample {
 
             connection.setSchema("book_storage");
             preparedStatement.setInt(1, authorId);
+            preparedStatement.setFetchSize(50); //each resultSet will have 50 or less elements
+            //it decreases amount of used memory and safe from out of memory exception
 
             ResultSet resultSet = preparedStatement.executeQuery();
             List<Integer> bookIds = new ArrayList<>();
