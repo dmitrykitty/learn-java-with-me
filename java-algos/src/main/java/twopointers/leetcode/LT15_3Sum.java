@@ -7,7 +7,7 @@ import java.util.*;
  * and j != k, and nums[i] + nums[j] + nums[k] == 0.
  * Notice that the solution set must not contain duplicate triplets.
  */
-public class LT15 {
+public class LT15_3Sum {
     static void main() {
         System.out.println(threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
     }

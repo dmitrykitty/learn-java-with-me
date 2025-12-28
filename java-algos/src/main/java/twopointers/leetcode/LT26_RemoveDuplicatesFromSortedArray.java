@@ -8,7 +8,7 @@ package twopointers.leetcode;
  * The first k elements of nums should contain the unique numbers in sorted order.
  * The remaining elements beyond index k - 1 can be ignored.
  */
-public class LT26 {
+public class LT26_RemoveDuplicatesFromSortedArray {
     static void main() {
         int i = removeDuplicates(new int[]{1, 1, 2, 2, 3});
     }
