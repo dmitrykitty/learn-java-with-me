@@ -1,4 +1,6 @@
-package com.dnikitin.jdbc.util;
+package com.dnikitin.jdbc.util.singleconnection;
+
+import com.dnikitin.jdbc.util.PropertiesUtil;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

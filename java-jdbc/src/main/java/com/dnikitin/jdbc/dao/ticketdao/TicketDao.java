@@ -1,11 +1,7 @@
 package com.dnikitin.jdbc.dao.ticketdao;
 
 import com.dnikitin.jdbc.entity.TicketEntity;
-import com.dnikitin.jdbc.exception.DaoException;
-import com.dnikitin.jdbc.util.ConnectionManager;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 

@@ -2,7 +2,8 @@ package com.dnikitin.jdbc.dao.ticketdao;
 
 import com.dnikitin.jdbc.entity.TicketEntity;
 import com.dnikitin.jdbc.exception.DaoException;
-import com.dnikitin.jdbc.util.ConnectionManager;
+import com.dnikitin.jdbc.util.poolconnection.PoolManager;
+import com.dnikitin.jdbc.util.singleconnection.ConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class TicketDaoJDBC implements TicketDao {
 
     @Override
     public TicketEntity save(TicketEntity ticket) {
-        try (Connection connection = ConnectionManager.openConnection();
+        try (Connection connection = PoolManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SAVE_SQL, Statement.RETURN_GENERATED_KEYS)) {
 
             preparedStatement.setString(1, ticket.getPassengerNo());

@@ -1,6 +1,6 @@
 package com.dnikitin.jdbc.intro;
 
-import com.dnikitin.jdbc.util.ConnectionManager;
+import com.dnikitin.jdbc.util.singleconnection.ConnectionManager;
 
 
 import java.sql.Connection;
