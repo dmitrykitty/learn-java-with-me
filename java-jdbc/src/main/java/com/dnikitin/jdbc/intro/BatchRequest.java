@@ -15,7 +15,7 @@ public class BatchRequest {
 
         //each request to DB sent to the DB server by TCP/IP and it takes times
         //so to reduce time and not send each query separatly - use batch request to send them all in one
-        //usually used for DDL operations and delete/update/insert
+        //usually used for DDL operations and delete/update/insertgit
         try (Connection connection = ConnectionManager.openConnection()) {
             try (Statement statement = connection.createStatement()) {
                 connection.setAutoCommit(false);
