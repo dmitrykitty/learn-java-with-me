@@ -1,4 +1,4 @@
-package com.dnikitin.jdbc.intro.sqlinjection;
+package com.dnikitin.jdbc.intro;
 
 import com.dnikitin.jdbc.util.ConnectionManager;
 

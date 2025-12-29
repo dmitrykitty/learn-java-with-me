@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/fc91d2a2-7d35-473a-96aa-9896a547f249/console.sql" value="fc91d2a2-7d35-473a-96aa-9896a547f249" />
     <file url="file://$PROJECT_DIR$/java-jdbc/src/main/java/com/dnikitin/jdbc/intro/JdbcRunner.java" value="55048076-6301-404b-b6bb-cd2ad9985897" />
+    <file url="file://$PROJECT_DIR$/java-jdbc/src/main/java/com/dnikitin/jdbc/intro/SqlInjectionExample.java" value="fc91d2a2-7d35-473a-96aa-9896a547f249" />
+    <file url="file://$PROJECT_DIR$/java-jdbc/src/main/java/com/dnikitin/jdbc/intro/Transactions.java" value="fc91d2a2-7d35-473a-96aa-9896a547f249" />
+    <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/flightRepo2/optimization.sql" value="fc91d2a2-7d35-473a-96aa-9896a547f249" />
   </component>
 </project>
