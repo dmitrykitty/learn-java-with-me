@@ -2,6 +2,7 @@ package com.dnikitin.jdbc.dao;
 
 import com.dnikitin.jdbc.dao.ticketdao.TicketDao;
 import com.dnikitin.jdbc.dao.ticketdao.TicketDaoJDBC;
+import com.dnikitin.jdbc.dto.TicketFilter;
 import com.dnikitin.jdbc.entity.TicketEntity;
 
 import java.math.BigDecimal;
@@ -10,6 +11,13 @@ import java.util.Optional;
 
 public class DaoRunner {
     public static void main(String[] args) {
+        findAllWithConditionTest();
+    }
+
+    private static void findAllWithConditionTest() {
+        TicketFilter ticketFilter = new TicketFilter(10, 0, null, "C");
+        TicketDao ticketDao = TicketDaoJDBC.getInstance();
+        ticketDao.findAll(ticketFilter).forEach(System.out::println);
     }
 
     private static void findAllTest() {

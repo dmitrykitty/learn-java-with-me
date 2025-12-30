@@ -1,5 +1,6 @@
 package com.dnikitin.jdbc.dao.ticketdao;
 
+import com.dnikitin.jdbc.dto.TicketFilter;
 import com.dnikitin.jdbc.entity.TicketEntity;
 
 import java.util.List;
@@ -20,5 +21,7 @@ public interface TicketDao {
     Optional<TicketEntity> findById(Long id);
 
     List<TicketEntity> findAll();
+
+    List<TicketEntity> findAll(TicketFilter filter);
 
 }

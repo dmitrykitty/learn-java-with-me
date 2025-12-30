@@ -66,7 +66,8 @@ public final class PoolManager {
                     (proxy, method, args) -> {
                         // If 'close()' is called, return proxy to the pool instead of closing the physical connection.
                         if (method.getName().equals("close")) {
-                            return pool.add((Connection) proxy);
+                            pool.add((Connection) proxy);
+                            return null;
                         }
                         // For any other method, execute it on the real physical connection.
                         return method.invoke(connection, args);
@@ -103,8 +104,7 @@ public final class PoolManager {
             try {
                 connection.close();
             } catch (SQLException e) {
-                // Logging or handling individual connection closure errors.
-                throw new RuntimeException("Error closing physical connection.", e);
+                e.printStackTrace();
             }
         }
     }

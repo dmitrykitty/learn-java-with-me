@@ -1,5 +1,6 @@
 package com.dnikitin.jdbc.dao.ticketdao;
 
+import com.dnikitin.jdbc.dto.TicketFilter;
 import com.dnikitin.jdbc.entity.TicketEntity;
 import com.dnikitin.jdbc.exception.DaoException;
 import com.dnikitin.jdbc.util.poolconnection.PoolManager;
@@ -9,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 public class TicketDaoJDBC implements TicketDao {
     private static final TicketDaoJDBC INSTANCE = new TicketDaoJDBC();
@@ -36,6 +40,7 @@ public class TicketDaoJDBC implements TicketDao {
     private static final String FIND_BY_ID_SQL = """
             select id, passenger_no, passenger_name, flight_id, seat_no, cost
             from ticket;
+            where id = ?;
             """;
 
     private static final String FIND_ALL_SQL = """
@@ -51,8 +56,53 @@ public class TicketDaoJDBC implements TicketDao {
     }
 
     @Override
+    public List<TicketEntity> findAll(TicketFilter filter) {
+        List<Object> params = new ArrayList<>();
+        List<String> whereClauses = new ArrayList<>();
+
+        if(filter.passengerName() != null){
+            whereClauses.add("passenger_name = ?");
+            params.add(filter.passengerName());
+        }
+
+        if(filter.seatNo() != null){
+            whereClauses.add("seat_no like ?");
+            params.add(filter.seatNo() + "%");
+        }
+
+
+        params.add(filter.limit());
+        params.add(filter.offset());
+
+        String where = whereClauses.stream()
+                .collect(joining(" AND ", " WHERE ", " LIMIT ? OFFSET ?"));
+
+        String sql = FIND_ALL_SQL + where;
+
+        try (Connection connection = PoolManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            for (int i = 0; i < params.size(); i++) {
+                preparedStatement.setObject(i + 1, params.get(i));
+            }
+
+            System.out.println(preparedStatement);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<TicketEntity> ticketEntities = new ArrayList<>();
+            while (resultSet.next()) {
+                ticketEntities.add(buildTicketEntity(resultSet));
+            }
+            return ticketEntities;
+
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    @Override
     public List<TicketEntity> findAll() {
-        try (Connection connection = ConnectionManager.openConnection();
+        try (Connection connection = PoolManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL_SQL)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             List<TicketEntity> tickets = new ArrayList<>();
@@ -60,14 +110,14 @@ public class TicketDaoJDBC implements TicketDao {
                 tickets.add(buildTicketEntity(resultSet));
             }
             return tickets;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new DaoException(e);
         }
     }
 
     @Override
     public boolean delete(Long id) {
-        try (Connection connection = ConnectionManager.openConnection();
+        try (Connection connection = PoolManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(DELETE_SQL)) {
 
             preparedStatement.setLong(1, id);
@@ -103,7 +153,7 @@ public class TicketDaoJDBC implements TicketDao {
 
     @Override
     public boolean update(TicketEntity ticket) {
-        try (Connection connection = ConnectionManager.openConnection();
+        try (Connection connection = PoolManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
             preparedStatement.setString(1, ticket.getPassengerNo());
             preparedStatement.setString(2, ticket.getPassengerName());
@@ -121,7 +171,7 @@ public class TicketDaoJDBC implements TicketDao {
 
     @Override
     public Optional<TicketEntity> findById(Long id) {
-        try (Connection connection = ConnectionManager.openConnection();
+        try (Connection connection = PoolManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_BY_ID_SQL)) {
 
             preparedStatement.setLong(1, id);
