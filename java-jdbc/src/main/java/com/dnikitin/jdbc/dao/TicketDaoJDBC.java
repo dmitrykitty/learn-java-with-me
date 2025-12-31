@@ -1,30 +1,27 @@
-package com.dnikitin.jdbc.dao.ticketdao;
+package com.dnikitin.jdbc.dao;
 
 import com.dnikitin.jdbc.dto.TicketFilter;
 import com.dnikitin.jdbc.entity.TicketEntity;
 import com.dnikitin.jdbc.exception.DaoException;
 import com.dnikitin.jdbc.util.poolconnection.PoolManager;
-import com.dnikitin.jdbc.util.singleconnection.ConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.*;
-
-public class TicketDaoJDBC implements TicketDao {
+public class TicketDaoJDBC implements Dao<Long, TicketEntity, TicketFilter> {
     private static final TicketDaoJDBC INSTANCE = new TicketDaoJDBC();
+    private final FlightDaoJDBC flightDaoJDBC = FlightDaoJDBC.getInstance();
 
     private static final String DELETE_SQL = """
             delete from ticket
-            where id = ?;
+            where id = ?
             """;
 
     private static final String SAVE_SQL = """
             insert into ticket(passenger_no, passenger_name, flight_id, seat_no, cost)
-            values(?, ?, ?, ?, ?);
+            values(?, ?, ?, ?, ?)
             """;
 
     private static final String UPDATE_SQL = """
@@ -34,13 +31,13 @@ public class TicketDaoJDBC implements TicketDao {
                 flight_id = ?,
                 seat_no = ?,
                 cost = ?
-            where id = ?;
+            where id = ?
             """;
 
     private static final String FIND_BY_ID_SQL = """
             select id, passenger_no, passenger_name, flight_id, seat_no, cost
-            from ticket;
-            where id = ?;
+            from ticket
+            where id = ?
             """;
 
     private static final String FIND_ALL_SQL = """
@@ -57,15 +54,16 @@ public class TicketDaoJDBC implements TicketDao {
 
     @Override
     public List<TicketEntity> findAll(TicketFilter filter) {
+
         List<Object> params = new ArrayList<>();
         List<String> whereClauses = new ArrayList<>();
 
-        if(filter.passengerName() != null){
+        if (filter.passengerName() != null) {
             whereClauses.add("passenger_name = ?");
             params.add(filter.passengerName());
         }
 
-        if(filter.seatNo() != null){
+        if (filter.seatNo() != null) {
             whereClauses.add("seat_no like ?");
             params.add(filter.seatNo() + "%");
         }
@@ -74,10 +72,14 @@ public class TicketDaoJDBC implements TicketDao {
         params.add(filter.limit());
         params.add(filter.offset());
 
-        String where = whereClauses.stream()
-                .collect(joining(" AND ", " WHERE ", " LIMIT ? OFFSET ?"));
+        StringBuilder sqlBuilder = new StringBuilder(FIND_ALL_SQL);
 
-        String sql = FIND_ALL_SQL + where;
+        if (!whereClauses.isEmpty()) {
+            sqlBuilder.append(" WHERE ");
+            sqlBuilder.append(String.join(" AND ", whereClauses));
+        }
+        sqlBuilder.append(" LIMIT ? OFFSET ?");
+        String sql = sqlBuilder.toString();
 
         try (Connection connection = PoolManager.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -135,7 +137,7 @@ public class TicketDaoJDBC implements TicketDao {
 
             preparedStatement.setString(1, ticket.getPassengerNo());
             preparedStatement.setString(2, ticket.getPassengerName());
-            preparedStatement.setLong(3, ticket.getFlightId());
+            preparedStatement.setLong(3, ticket.getFlight().getId());
             preparedStatement.setString(4, ticket.getSeatNo());
             preparedStatement.setBigDecimal(5, ticket.getCost());
             preparedStatement.executeUpdate();
@@ -157,7 +159,7 @@ public class TicketDaoJDBC implements TicketDao {
              PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
             preparedStatement.setString(1, ticket.getPassengerNo());
             preparedStatement.setString(2, ticket.getPassengerName());
-            preparedStatement.setLong(3, ticket.getFlightId());
+            preparedStatement.setLong(3, ticket.getFlight().getId());
             preparedStatement.setString(4, ticket.getSeatNo());
             preparedStatement.setBigDecimal(5, ticket.getCost());
             preparedStatement.setLong(6, ticket.getId());
@@ -191,13 +193,11 @@ public class TicketDaoJDBC implements TicketDao {
         TicketEntity ticketEntity = TicketEntity.builder()
                 .passengerNo(resultSet.getString("passenger_no"))
                 .passengerName(resultSet.getString("passenger_name"))
-                .flightId(resultSet.getLong("flight_id"))
                 .seatNo(resultSet.getString("seat_no"))
                 .cost(resultSet.getBigDecimal("cost"))
                 .build();
         ticketEntity.setId(resultSet.getLong("id"));
+        ticketEntity.setFlight(flightDaoJDBC.findById(resultSet.getLong("flight_id")).orElse(null));
         return ticketEntity;
     }
-
-
 }

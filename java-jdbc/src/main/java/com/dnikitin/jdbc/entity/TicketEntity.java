@@ -13,15 +13,15 @@ public class TicketEntity {
     private Long id;
     private String passengerNo;
     private String passengerName;
-    private Long flightId; //FK
+    private FlightEntity flight; //FK
     private String seatNo;
     private BigDecimal cost;
 
     @Builder
-    public TicketEntity(String passengerNo, String passengerName, Long flightId, String seatNo, BigDecimal cost) {
+    public TicketEntity(String passengerNo, String passengerName, FlightEntity flight, String seatNo, BigDecimal cost) {
         this.passengerNo = passengerNo;
         this.passengerName = passengerName;
-        this.flightId = flightId;
+        this.flight = flight;
         this.seatNo = seatNo;
         this.cost = cost;
     }

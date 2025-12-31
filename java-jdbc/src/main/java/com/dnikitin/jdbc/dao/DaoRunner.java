@@ -1,12 +1,9 @@
 package com.dnikitin.jdbc.dao;
 
-import com.dnikitin.jdbc.dao.ticketdao.TicketDao;
-import com.dnikitin.jdbc.dao.ticketdao.TicketDaoJDBC;
 import com.dnikitin.jdbc.dto.TicketFilter;
 import com.dnikitin.jdbc.entity.TicketEntity;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 public class DaoRunner {
@@ -16,17 +13,17 @@ public class DaoRunner {
 
     private static void findAllWithConditionTest() {
         TicketFilter ticketFilter = new TicketFilter(10, 0, null, "C");
-        TicketDao ticketDao = TicketDaoJDBC.getInstance();
+        Dao<Long, TicketEntity, TicketFilter> ticketDao = TicketDaoJDBC.getInstance();
         ticketDao.findAll(ticketFilter).forEach(System.out::println);
     }
 
     private static void findAllTest() {
-        TicketDao ticketDao = TicketDaoJDBC.getInstance();
+        Dao<Long, TicketEntity, TicketFilter> ticketDao = TicketDaoJDBC.getInstance();
         ticketDao.findAll().forEach(System.out::println);
     }
 
     private static void findByIdAndUpdateTest() {
-        TicketDao ticketDao = TicketDaoJDBC.getInstance();
+        Dao<Long, TicketEntity, TicketFilter> ticketDao = TicketDaoJDBC.getInstance();
         Optional<TicketEntity> ticketById = ticketDao.findById(2L);
         System.out.println(ticketById);
 
@@ -51,15 +48,15 @@ public class DaoRunner {
     }
 
     private static void saveTest() {
-        TicketDao ticketDao = TicketDaoJDBC.getInstance();
+        Dao<Long, TicketEntity, TicketFilter> ticketDao = TicketDaoJDBC.getInstance();
 
         TicketEntity ticket = TicketEntity.builder()
                 .passengerNo("1234")
                 .passengerName("TestPassenger")
-                .flightId(3L)
                 .seatNo("12A")
                 .cost(BigDecimal.valueOf(50.50))
                 .build();
+        ticket.setFlight(FlightDaoJDBC.getInstance().findById(3L).orElse(null));
 
         TicketEntity ticketEntity = ticketDao.save(ticket);
         System.out.println(ticketEntity);

@@ -1,5 +1,7 @@
 package com.dnikitin.jdbc.dto;
 
+import java.io.Serializable;
+
 /**
  * A Data Transfer Object (DTO) used to encapsulate and transport data
  * required for filtering query results.
@@ -16,5 +18,5 @@ package com.dnikitin.jdbc.dto;
 public record TicketFilter(int limit,
                            int offset,
                            String passengerName,
-                           String seatNo) {
+                           String seatNo) implements Filter {
 }
