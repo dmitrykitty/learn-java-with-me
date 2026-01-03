@@ -1,7 +1,6 @@
 package com.dnikitin.servlet;
 
 import com.dnikitin.dto.request.TicketFilter;
-import com.dnikitin.service.FlightService;
 import com.dnikitin.service.TicketService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
