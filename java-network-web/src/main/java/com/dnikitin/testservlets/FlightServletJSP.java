@@ -1,6 +1,5 @@
 package com.dnikitin.testservlets;
 
-import com.dnikitin.dto.response.FlightDto;
 import com.dnikitin.service.FlightService;
 import com.dnikitin.util.JspHelper;
 import jakarta.servlet.ServletException;
@@ -10,22 +9,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.PrintWriter;
 
-import static java.util.stream.Collectors.*;
-
-@WebServlet("/content")
-public class ContentServlet extends HttpServlet {
+@WebServlet("/flights-jsp")
+public class FlightServletJSP extends HttpServlet {
 
     private final FlightService flightService = FlightService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<FlightDto> all = flightService.findAll();
-        req.setAttribute("flights", all);
-        req.getSession().setAttribute("flightMap", all.stream()
-                .collect(toMap(FlightDto::id, FlightDto::description)));
-        req.getRequestDispatcher(JspHelper.getPath("content.jsp")).forward(req,resp);
+        req.setAttribute("flights", flightService.findAll());
+
+        req.getRequestDispatcher(JspHelper.getPath("flights-jsp.jsp")).forward(req,resp);
     }
 }
+

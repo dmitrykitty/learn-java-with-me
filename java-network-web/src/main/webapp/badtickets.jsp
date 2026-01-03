@@ -29,6 +29,7 @@
             out.write(String.format("<li> %s </li>", ticketDto.toString()));
         }
     %>
+
 </ul>
 
 </body>
