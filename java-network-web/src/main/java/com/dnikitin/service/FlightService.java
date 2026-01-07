@@ -5,6 +5,7 @@ import com.dnikitin.dto.response.FlightDto;
 
 import java.util.List;
 
+
 public class FlightService {
     private static final FlightService INSTANCE = new FlightService();
 

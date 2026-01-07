@@ -7,13 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="java-network-web" />
         <module name="java-algos" />
         <module name="java-fundamentals" />
         <module name="java-network" />
+        <module name="java-spring-boot" />
+        <module name="java-network-web" />
         <module name="java-testing" />
         <module name="java-jdbc" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="java-spring-boot" options="-parameters" />
+    </option>
   </component>
 </project>

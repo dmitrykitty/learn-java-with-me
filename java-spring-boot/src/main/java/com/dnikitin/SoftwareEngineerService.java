@@ -9,12 +9,15 @@ public class SoftwareEngineerService {
 
     private final SoftwareEngineerRepository softwareEngineerRepository;
 
-    public SoftwareEngineerService(SoftwareEngineerRepository softwareEngineerRepository) {
-        this.softwareEngineerRepository = softwareEngineerRepository;
-    }
-
     public List<SoftwareEngineer> getSoftwareEngineers() {
         return softwareEngineerRepository.findAll();
+    }
+
+
+
+
+    public SoftwareEngineerService(SoftwareEngineerRepository softwareEngineerRepository) {
+        this.softwareEngineerRepository = softwareEngineerRepository;
     }
 
     public void insertSoftwareEngineer(SoftwareEngineer softwareEngineer) {

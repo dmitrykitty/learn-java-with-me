@@ -12,3 +12,6 @@ Content-Type: application/json
   "name": "Kris",
   "techStack": "assembler, elixir, nodejs, react"
 }
+
+###
+GET http://localhost:8080/api/v1/software-engineers/2

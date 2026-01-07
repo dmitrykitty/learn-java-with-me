@@ -50,6 +50,25 @@ public class FlightDao implements Dao<Integer, FlightEntity> {
         }
     }
 
+    private FlightEntity buildFlightEntity(ResultSet resultSet) {
+        FlightEntity flight = null;
+        try {
+            flight = FlightEntity.builder()
+                    .flightNo(resultSet.getString("flight_no"))
+                    .departureDate(resultSet.getTimestamp("departure_date").toLocalDateTime())
+                    .departureAirportCode(resultSet.getString("departure_airport_code"))
+                    .arrivalDate(resultSet.getTimestamp("arrival_date").toLocalDateTime())
+                    .arrivalAirportCode(resultSet.getString("arrival_airport_code"))
+                    .aircraftId(resultSet.getInt("aircraft_id"))
+                    .status(FlightStatus.fromLabel(resultSet.getString("status")))
+                    .build();
+            flight.setId(resultSet.getLong("id"));
+            return flight;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public Optional<FlightEntity> findById(Integer id) {
         return Optional.empty();
@@ -68,24 +87,5 @@ public class FlightDao implements Dao<Integer, FlightEntity> {
     @Override
     public FlightEntity save(FlightEntity entity) {
         return null;
-    }
-
-    private FlightEntity buildFlightEntity(ResultSet resultSet) {
-        FlightEntity flight = null;
-        try {
-            flight = FlightEntity.builder()
-                    .flightNo(resultSet.getString("flight_no"))
-                    .departureDate(resultSet.getTimestamp("departure_date").toLocalDateTime())
-                    .departureAirportCode(resultSet.getString("departure_airport_code"))
-                    .arrivalDate(resultSet.getTimestamp("arrival_date").toLocalDateTime())
-                    .arrivalAirportCode(resultSet.getString("arrival_airport_code"))
-                    .aircraftId(resultSet.getInt("aircraft_id"))
-                    .status(FlightStatus.fromLabel(resultSet.getString("status")))
-                    .build();
-            flight.setId(resultSet.getLong("id"));
-            return flight;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

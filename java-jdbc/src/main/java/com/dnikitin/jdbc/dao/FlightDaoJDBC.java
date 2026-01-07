@@ -1,10 +1,9 @@
 package com.dnikitin.jdbc.dao;
 
-import com.dnikitin.jdbc.dto.Filter;
+
 import com.dnikitin.jdbc.dto.FlightFilter;
 import com.dnikitin.jdbc.entity.FlightEntity;
 import com.dnikitin.jdbc.entity.Status;
-import com.dnikitin.jdbc.entity.TicketEntity;
 import com.dnikitin.jdbc.exception.DaoException;
 import com.dnikitin.jdbc.util.poolconnection.PoolManager;
 
