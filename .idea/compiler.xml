@@ -11,6 +11,7 @@
         <module name="java-fundamentals" />
         <module name="java-network" />
         <module name="java-spring-boot" />
+        <module name="java-jackson" />
         <module name="java-network-web" />
         <module name="java-testing" />
         <module name="java-jdbc" />
