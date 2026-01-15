@@ -12,7 +12,6 @@
         <module>java-jdbc</module>
         <module>java-network-web</module>
         <module>java-algos</module>
-        <module>java-jackson</module>
     </modules>
     <version>1.0-SNAPSHOT</version>
 
