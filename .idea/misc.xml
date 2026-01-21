@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/java-spring-boot/pom.xml" />
+        <option value="$PROJECT_DIR$/java-hibernate/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

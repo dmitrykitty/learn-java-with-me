@@ -86,6 +86,8 @@ public class UserServiceTest {
 
     @Test
     @Tag("exception")
+    //if we have flaky test - we can use @Disable to ignore it
+    @Disabled("bad test, no need to run")
         //we can run tests by tag
         //mvn clean test -pl module-name -Dgroups=exception
     void throwsExceptionIfUserIsNull() {
@@ -98,7 +100,8 @@ public class UserServiceTest {
                 .hasNoCause();
     }
 
-    @Test
+    //if we want to repeat the test few times to check is it flaky or no
+    @RepeatedTest(value = 5, name = RepeatedTest.LONG_DISPLAY_NAME)
     void UsersListCorrect() {
         userService.add(JOHN);
         userService.add(MARRY);

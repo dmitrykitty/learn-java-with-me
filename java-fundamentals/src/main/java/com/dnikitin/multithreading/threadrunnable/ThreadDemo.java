@@ -18,7 +18,18 @@ public class ThreadDemo {
         //nawet mozna przekaz tam labde, bo przyjmuje Runnable
         Thread threadLambda = new Thread(() -> System.out.println("Hello from lambda: " + Thread.currentThread().getName()));
 
+        Runnable runnable = new Runnable(){
+            @Override
+            public void run() {
+                System.out.println("Hello from anonymous class: " + Thread.currentThread().getName());
+            }
+        };
+
+        Thread threadAnonymous = new Thread(runnable, "ThreadName");
+
         threadRunnable.start();
+
+        threadAnonymous.start();
 
         threadLambda.start();
 
