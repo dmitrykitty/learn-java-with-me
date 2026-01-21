@@ -3,8 +3,8 @@ package com.dnikitin.entity;
 import com.dnikitin.entity.converter.BirthdayConverter;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDate;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 
 @Data
@@ -14,8 +14,8 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "users", schema = "public")
 public class User {
-    //two main annotation for POJO to be Hibernate Entity - @Entuty, @Id
-    //Id shoulb be Serializable
+    //Minimal requirement for a JPA Entity: @Entity and @Id (Primary Key).
+    //Primary Key must implement Serializable (String does it by default).
 
     @Id
     private String username;
@@ -25,12 +25,19 @@ public class User {
 
     @Column(name="birth_date")
     @Convert(converter = BirthdayConverter.class)
-    //allow to convert custom user fileds to SQL types
-    //also possible to set in the configurationj (config.addAttributeConverter(new BirthdayConverter(), true)
-    //if we want to use conversion without annotations in all tables with the same field
+    // Converts custom Java types to a basic JDBC-compatible type.
+    // Can be applied globally via @Converter(autoApply = true)
+    // or manually in Hibernate configuration.
     private Birthday birthDate;
 
-    //annotation to convert enumtype to string or in (EnumType.INT)
+    //Defines how Enum is persisted: as a String or an integer index (EnumType.ORDINAL).
     @Enumerated(EnumType.STRING)
     private Role role;
+
+
+    // Informs Hibernate to treat the field as JSON on the JDBC level.
+    @JdbcTypeCode(SqlTypes.JSON)
+    // Forces the DDL to use PostgreSQL's binary JSON format (jsonb).
+    @Column(columnDefinition = "jsonb")
+    private String info;
 }
