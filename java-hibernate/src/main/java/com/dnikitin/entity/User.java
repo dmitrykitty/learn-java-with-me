@@ -1,9 +1,7 @@
 package com.dnikitin.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.dnikitin.entity.converter.BirthdayConverter;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -26,7 +24,13 @@ public class User {
     private String lastName;
 
     @Column(name="birth_date")
-    private LocalDate birthDate;
+    @Convert(converter = BirthdayConverter.class)
+    //allow to convert custom user fileds to SQL types
+    //also possible to set in the configurationj (config.addAttributeConverter(new BirthdayConverter(), true)
+    //if we want to use conversion without annotations in all tables with the same field
+    private Birthday birthDate;
 
-    private Integer age;
+    //annotation to convert enumtype to string or in (EnumType.INT)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
