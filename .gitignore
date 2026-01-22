@@ -1,3 +1,5 @@
+logs/
+
 java-jdbc/src/main/resources/application.properties
 java-network-web/src/main/resources/database.properties
 target/

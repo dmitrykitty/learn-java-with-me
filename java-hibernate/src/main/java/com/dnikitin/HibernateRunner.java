@@ -3,30 +3,29 @@ package com.dnikitin;
 import com.dnikitin.entity.Birthday;
 import com.dnikitin.entity.Role;
 import com.dnikitin.entity.User;
-import com.dnikitin.entity.converter.BirthdayConverter;
+
+import com.dnikitin.util.HibernateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.time.LocalDate;
 
+@Slf4j
 public class HibernateRunner {
+    //private static final Logger log = LoggerFactory.getLogger(HibernateRunner.class);
+
     static void main() {
 
         //Session == Connection
         //SessionFactory == pool
 
-        Configuration configuration = new Configuration().configure();
-        configuration.configure(); //by default hibernate.cfg.xml\
-        //configuration.addAnnotatedClass(User.class);
-        //configuration.setPhysicalNamingStrategy(new PhysicalNamingStrategySnakeCaseImpl()); we can set a type of name mapping
-
-        configuration.addAttributeConverter(new BirthdayConverter(), true); //no need to set autoapplay=true
-        // if we have it above the converterClass
-
-        try (SessionFactory sessionFactory = configuration.buildSessionFactory();
-            Session session = sessionFactory.openSession()){
+        try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
+             Session session = sessionFactory.openSession();
+             Session session2 = sessionFactory.openSession()) {
             session.beginTransaction();
 
             User user1 = User.builder()
@@ -43,6 +42,9 @@ public class HibernateRunner {
                             """)
                     .build();
             //to make this entity available to save - add it to configuration throught configure or xml
+            log.info("User entity {} is in transient state", user1);
+
+            //=================================CRUD====================================
 
             //to save the object
             //session.persist(user1);
@@ -72,7 +74,10 @@ public class HibernateRunner {
 
             //mapping from result set to user.
             User user = session.find(User.class, user2.getUsername());
+            log.info("User entity {} is in persistence state inside session {}", user, session);
             //before close the transaction Hibernate execute flush() and it automatically update columns values inside DB
+
+            //=================================1ST-LEVEL-CACHE====================================
             user.setLastName("Nikitina");
 
             System.out.println(session.isDirty()); //true
@@ -84,10 +89,33 @@ public class HibernateRunner {
             //session.evict(user2); //remove entity from 1st level cache
             //session.clear(); //remove all entities from 1st level cache
 
-
-
             session.getTransaction().commit();
 
+            //===================================ENTITY-LIFECYCLE=====================================
+
+            //new entity -> TRANSIENT --- merge(), persistence() --- > PERSISTENT ----remove()---> REMOVED
+            //    \                                                  /          \
+            //      -------------------- get() ---------------------             ------ evict(), clear(), close(), merge() --> DETACHED
+            //NOTE: entity has state according to session!!!
+            //if removew -> firstly get (changed state to PERSISTENT) and then remove (changed state to REMOVED)
+            session2.beginTransaction();
+
+            //TRANSIENT
+            User test1 = User.builder()
+                    .username("test1@gmail.com")
+                    .firstName("test1")
+                    .build();
+
+            //session2.persist(test1); //test1 already PERSISTENT
+            test1.setLastName("test1LN");
+            //set all values from DB to Entity (get fresh test, old test set values from fresh test)
+            session2.refresh(test1);
+
+            session2.getTransaction().commit();
+            log.warn("Session is flushed inside transaction {}", session2.getTransaction());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw e;
         }
     }
 }
