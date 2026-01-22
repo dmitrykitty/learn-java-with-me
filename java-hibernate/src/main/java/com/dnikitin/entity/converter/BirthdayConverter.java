@@ -1,6 +1,6 @@
 package com.dnikitin.entity.converter;
 
-import com.dnikitin.entity.Birthday;
+import com.dnikitin.entity.user.Birthday;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

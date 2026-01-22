@@ -14,7 +14,8 @@
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 
-        <mapping class="com.dnikitin.entity.User"/>
+        <mapping class="com.dnikitin.entity.user.User"/>
+        <mapping class="com.dnikitin.entity.embeddedcomponent.User1"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

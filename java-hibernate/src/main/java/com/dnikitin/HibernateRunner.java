@@ -1,15 +1,13 @@
 package com.dnikitin;
 
-import com.dnikitin.entity.Birthday;
-import com.dnikitin.entity.Role;
-import com.dnikitin.entity.User;
+import com.dnikitin.entity.user.Birthday;
+import com.dnikitin.entity.user.Role;
+import com.dnikitin.entity.user.User;
 
 import com.dnikitin.util.HibernateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 import java.time.LocalDate;

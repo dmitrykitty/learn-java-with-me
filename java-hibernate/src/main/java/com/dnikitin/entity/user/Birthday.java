@@ -1,4 +1,4 @@
-package com.dnikitin.entity;
+package com.dnikitin.entity.user;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

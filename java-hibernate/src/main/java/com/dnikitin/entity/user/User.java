@@ -1,4 +1,4 @@
-package com.dnikitin.entity;
+package com.dnikitin.entity.user;
 
 import com.dnikitin.entity.converter.BirthdayConverter;
 import jakarta.persistence.*;

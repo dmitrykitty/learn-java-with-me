@@ -1,17 +1,14 @@
 package com.dnikitin;
 
-import com.dnikitin.entity.User;
+import com.dnikitin.entity.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class HibernateRunnerTest {
 
