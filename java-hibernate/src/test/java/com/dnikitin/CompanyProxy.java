@@ -1,6 +1,6 @@
 package com.dnikitin;
 
-import com.dnikitin.entity.manytoone.Company;
+import com.dnikitin.entity.manytoone_onetomany.Company;
 import org.hibernate.proxy.HibernateProxy;
 import org.hibernate.proxy.LazyInitializer;
 import org.hibernate.proxy.ProxyConfiguration;

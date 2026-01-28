@@ -1,9 +1,7 @@
-package com.dnikitin.entity.manytoone;
+package com.dnikitin.entity.manytoone_onetomany;
 
 import com.dnikitin.util.HibernateUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.core.util.internal.HttpInputStreamUtil;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -26,7 +24,7 @@ public class ManyToOneRunner {
                     .build();
 
             //session.persist(company);
-            session.persist(worker);
+            //session.persist(worker);
 
             Worker worker1 = session.find(Worker.class, 1L);
             //used left outer join for worker left join company if company_id is nullable
@@ -38,6 +36,34 @@ public class ManyToOneRunner {
 
             session.flush();
 
+            session.find(Company.class, 1);
+
+
+
+            Company company1 = Company.builder()
+                    .name("Meta")
+                    .build();
+
+            Worker test1 = Worker.builder()
+                    .firstName("test1")
+                    .company(company1)
+                    .build();
+
+            company1.addWorker(test1);
+
+            Worker test2 = Worker.builder()
+                    .firstName("test1")
+                    .company(company1)
+                    .build();
+            company1.addWorker(test2);
+
+            Worker test3 = Worker.builder()
+                    .firstName("test3")
+                    .company(company1)
+                    .build();
+            company1.addWorker(test3);
+
+            session.persist(company1); //everything saved thanks to Cascade.All
 
             session.getTransaction().commit();
         }

@@ -1,10 +1,8 @@
 package com.dnikitin;
 
-import com.dnikitin.entity.manytoone.Company;
+import com.dnikitin.entity.manytoone_onetomany.Company;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 public class ProxyTest {
