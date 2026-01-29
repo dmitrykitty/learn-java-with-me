@@ -22,8 +22,10 @@ public class Company {
     String name;
 
     @Builder.Default
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL,  orphanRemoval = true)
     //@JoinColumn(name = "company_id") we can skeep it if add mappedBy
+    //CascadeType - what we gonna do with Collection entities when something going with main entity
+    //orphanRemoval - if we delete Worker from the Set - should we deleted from DB
     //Lazy initialisation (by default) with PersistentBag (Proxy for collection)
     private Set<Worker> workers =  new HashSet<>();
 

@@ -13,7 +13,7 @@ public class Worker {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false,  fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(optional = false,  fetch = FetchType.LAZY)
     //LAZY - no company will be provided to the worker -> only proxy company
     //when we really wants to get company -> makes new select just to get only company
 
