@@ -2,6 +2,9 @@ package binarytree.dfs;
 
 import binarytree.TreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class TreeRunner {
     static void main() {
         TreeNode root = createTestTree();
@@ -19,6 +22,11 @@ public class TreeRunner {
         System.out.println();
 
         DFS_BFS.stack_dfs_pre_order(root);
+
+        LT101_SymmetricTree task101 = new LT101_SymmetricTree();
+        TreeNode taskRoot = arrayToTree(new Integer[]{2,3,3,4,5,null,4});
+        task101.isSymmetric(taskRoot);
+
 
 
     }
@@ -40,5 +48,36 @@ public class TreeRunner {
         node3.right = node7;
 
         return root1;
+    }
+
+    public static TreeNode arrayToTree(Integer[] data) {
+        if (data == null || data.length == 0 || data[0] == null) {
+            return null;
+        }
+
+        TreeNode root = new TreeNode(data[0]);
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        int i = 1;
+        while (i < data.length) {
+            TreeNode parent = queue.poll();
+
+            // Próba utworzenia lewego dziecka
+            if (i < data.length && data[i] != null) {
+                parent.left = new TreeNode(data[i]);
+                queue.add(parent.left);
+            }
+            i++;
+
+            // Próba utworzenia prawego dziecka
+            if (i < data.length && data[i] != null) {
+                parent.right = new TreeNode(data[i]);
+                queue.add(parent.right);
+            }
+            i++;
+        }
+
+        return root;
     }
 }
