@@ -1,6 +1,5 @@
-package com.dnikitin.entity.onetoone_primarykey;
+package com.dnikitin.entity.onetoone;
 
-import com.dnikitin.entity.manytoone_onetomany.Worker;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,8 +10,8 @@ import lombok.*;
 @ToString(exclude = "worker")
 @EqualsAndHashCode(exclude = "worker")
 @Entity
-@Table(name = "worker_info_one_to_one_pk")
-public class WorkerInfoOneToOnePk {
+@Table(name = "worker_info_one_to_one")
+public class WorkerInfoOneToOne {
 
     @Id
     @Column(name = "worker_id")
@@ -21,7 +20,7 @@ public class WorkerInfoOneToOnePk {
     @OneToOne
     @JoinColumn(name = "worker_id")
     @MapsId //allows us to not add method setWorker
-    private WorkerOneToOnePk worker;
+    private WorkerOneToOne worker;
 
     @Column(nullable = false)
     private String email;
@@ -29,8 +28,8 @@ public class WorkerInfoOneToOnePk {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    public void setWorker(WorkerOneToOnePk worker) {
-        worker.setWorkerInfoOneToOnePk(this);
+    public void setWorker(WorkerOneToOne worker) {
+        worker.setWorkerInfoOneToOne(this);
         this.worker = worker;
         this.id = worker.getId();
     }

@@ -1,4 +1,4 @@
-package com.dnikitin.entity.onetoone_primarykey;
+package com.dnikitin.entity.onetoone;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,12 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "worker_one_to_one_pk")
+@Table(name = "worker_one_to_one")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class WorkerOneToOnePk {
+public class WorkerOneToOne {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,5 +22,8 @@ public class WorkerOneToOnePk {
     private String lastName;
 
     @OneToOne(mappedBy = "worker", cascade = CascadeType.ALL)
-    private WorkerInfoOneToOnePk workerInfoOneToOnePk;
+    private WorkerInfoOneToOne workerInfoOneToOne;
+
+    @OneToOne(mappedBy = "worker", cascade = CascadeType.ALL)
+    private Address address;
 }

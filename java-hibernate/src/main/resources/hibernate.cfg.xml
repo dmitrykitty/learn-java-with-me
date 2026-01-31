@@ -16,10 +16,13 @@
 
         <mapping class="com.dnikitin.entity.user.User"/>
         <mapping class="com.dnikitin.entity.embeddedcomponent.User1"/>
+
         <mapping class="com.dnikitin.entity.manytoone_onetomany.Worker"/>
         <mapping class="com.dnikitin.entity.manytoone_onetomany.Company"/>
-        <mapping class="com.dnikitin.entity.onetoone_primarykey.WorkerInfoOneToOnePk"/>
-        <mapping class="com.dnikitin.entity.onetoone_primarykey.WorkerOneToOnePk"/>
+
+        <mapping class="com.dnikitin.entity.onetoone.WorkerInfoOneToOne"/>
+        <mapping class="com.dnikitin.entity.onetoone.WorkerOneToOne"/>
+        <mapping class="com.dnikitin.entity.onetoone.Address"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
