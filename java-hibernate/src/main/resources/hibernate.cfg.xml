@@ -24,6 +24,9 @@
         <mapping class="com.dnikitin.entity.onetoone.WorkerOneToOne"/>
         <mapping class="com.dnikitin.entity.onetoone.Address"/>
 
+        <mapping class="com.dnikitin.entity.manytomany.ChatManyToMany"/>
+        <mapping class="com.dnikitin.entity.manytomany.UserManyToMany"/>
+
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
     </session-factory>

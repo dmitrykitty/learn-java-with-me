@@ -28,6 +28,4 @@ public class Address {
         this.worker = worker;
         worker.setAddress(this);
     }
-
-
 }
