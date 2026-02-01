@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.dnikitin</groupId>
-    <artifactId>java-spring-boot</artifactId>
+    <artifactId>java-spring-boot-test1</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>java-spring-boot</name>
     <description>java-spring-boot</description>
