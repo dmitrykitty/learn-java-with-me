@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/073a500e-2ea7-4e43-ae10-643315bae125/console.sql" value="073a500e-2ea7-4e43-ae10-643315bae125" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/be4e694b-164b-4397-8722-e1160069ce17/console.sql" value="be4e694b-164b-4397-8722-e1160069ce17" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/fc91d2a2-7d35-473a-96aa-9896a547f249/console.sql" value="fc91d2a2-7d35-473a-96aa-9896a547f249" />
     <file url="file://$PROJECT_DIR$/java-jdbc/src/main/java/com/dnikitin/jdbc/intro/SqlInjectionExample.java" value="fc91d2a2-7d35-473a-96aa-9896a547f249" />

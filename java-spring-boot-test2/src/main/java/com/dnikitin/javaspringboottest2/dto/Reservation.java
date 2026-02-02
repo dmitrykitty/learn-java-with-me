@@ -1,4 +1,4 @@
-package com.dnikitin.javaspringboottest2.entity;
+package com.dnikitin.javaspringboottest2.dto;
 
 import lombok.Builder;
 

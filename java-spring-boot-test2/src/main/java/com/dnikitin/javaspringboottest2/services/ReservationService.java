@@ -1,22 +1,83 @@
 package com.dnikitin.javaspringboottest2.services;
 
-import com.dnikitin.javaspringboottest2.entity.Reservation;
-import com.dnikitin.javaspringboottest2.entity.ReservationStatus;
+import com.dnikitin.javaspringboottest2.dto.Reservation;
+import com.dnikitin.javaspringboottest2.dto.ReservationStatus;
+import com.dnikitin.javaspringboottest2.model.entity.ReservationEntity;
+import com.dnikitin.javaspringboottest2.repository.ReservationRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ReservationService {
 
-    public Reservation getReservationById(Long id) {
+    private final ReservationRepository repository;
+
+    public ReservationService(ReservationRepository repository) {
+        this.repository = repository;
+    }
+
+    public Reservation findReservationById(Long id) {
+        ReservationEntity reservationEntity = repository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Reservation not found with id " + id)
+        );
+        return mapFromEntity(reservationEntity);
+    }
+
+    public List<Reservation> findAllReservations() {
+        return repository.findAll().stream()
+                .map(this::mapFromEntity)
+                .toList();
+    }
+
+    public Reservation saveReservation(Reservation reservation) {
+        if (reservation.id() != null) {
+            throw new IllegalArgumentException("Reservation id should be null");
+        }
+        ReservationEntity reservationEntity = mapToEntity(reservation);
+        ReservationEntity saved = repository.save(reservationEntity);
+        return mapFromEntity(saved);
+    }
+
+    public Reservation updateReservation(Long id, Reservation reservation) {
+        ReservationEntity reservationEntity = repository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Reservation not found with id " + id)
+        );
+        if(reservationEntity.getStatus() != ReservationStatus.PENDING) {
+            throw new IllegalStateException("Cannot  modify reservation with status: " + reservationEntity.getStatus());
+        }
+        ReservationEntity updated = repository.save(ReservationEntity.builder()
+                .id(reservationEntity.getId())
+                .userId(reservation.userId())
+                .roomId(reservation.roomId())
+                .startDate(reservation.startDate())
+                .endDate(reservation.endDate())
+                .status(reservation.status())
+                .build());
+
+        return mapFromEntity(updated);
+    }
+
+    private Reservation mapFromEntity(ReservationEntity reservationEntity) {
         return Reservation.builder()
-                .id(id)
-                .roomId(10L)
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now().plusDays(5))
-                .status(ReservationStatus.APPROVED)
+                .id(reservationEntity.getId())
+                .userId(reservationEntity.getUserId())
+                .roomId(reservationEntity.getRoomId())
+                .startDate(reservationEntity.getStartDate())
+                .endDate(reservationEntity.getEndDate())
+                .status(reservationEntity.getStatus())
                 .build();
     }
 
+    private ReservationEntity mapToEntity(Reservation reservation) {
+        return ReservationEntity.builder()
+                .id(reservation.id())
+                .userId(reservation.userId())
+                .roomId(reservation.roomId())
+                .startDate(reservation.startDate())
+                .endDate(reservation.endDate())
+                .status(reservation.status())
+                .build();
+    }
 }
