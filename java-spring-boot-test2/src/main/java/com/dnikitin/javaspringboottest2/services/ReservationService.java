@@ -6,6 +6,7 @@ import com.dnikitin.javaspringboottest2.model.entity.ReservationEntity;
 import com.dnikitin.javaspringboottest2.repository.ReservationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -57,6 +58,42 @@ public class ReservationService {
                 .build());
 
         return mapFromEntity(updated);
+    }
+    @Transactional
+    public void cancelReservation(Long id) {
+        if (!repository.existsById(id)) {
+            throw new EntityNotFoundException("Reservation not found with id " + id);
+        }
+        repository.changeReservationStatus(id, ReservationStatus.CANCELLED);
+    }
+
+    @Transactional
+    public Reservation approveReservation(Long id) {
+
+        ReservationEntity reservationEntity = repository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Reservation not found with id " + id)
+        );
+
+        if(reservationEntity.getStatus() != ReservationStatus.PENDING) {
+            throw new IllegalStateException("Cannot  modify reservation with status: " + reservationEntity.getStatus());
+        }
+
+        if(isConflict(reservationEntity)){
+            throw new IllegalStateException("Reservation with id " + id + " is in conflict");
+        }
+
+        //dirty checking
+        reservationEntity.setStatus(ReservationStatus.APPROVED);
+        return  mapFromEntity(reservationEntity);
+    }
+
+    private boolean isConflict(ReservationEntity reservationEntity) {
+        return repository.checkCollision(
+                reservationEntity.getRoomId(),
+                reservationEntity.getId(),
+                reservationEntity.getEndDate(),
+                reservationEntity.getStartDate());
+
     }
 
     private Reservation mapFromEntity(ReservationEntity reservationEntity) {

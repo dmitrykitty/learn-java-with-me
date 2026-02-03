@@ -7,5 +7,7 @@
     <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/flightRepo2/coursePractise.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/flightRepo2/creating.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/java-jdbc/src/main/sqlscripts/flightRepo2/optimization.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/java-spring-boot-test2/src/main/java/com/dnikitin/javaspringboottest2/repository/ReservationRepository.java" dialect="GenericSQL" />
+    <file url="PROJECT" dialect="PostgreSQL" />
   </component>
 </project>

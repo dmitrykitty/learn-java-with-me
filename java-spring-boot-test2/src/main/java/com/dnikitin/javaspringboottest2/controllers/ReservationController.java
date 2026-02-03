@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reservation")
+@RequestMapping("/api/reservation")
 @Slf4j
 public class ReservationController {
 
@@ -35,6 +35,12 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.findAllReservations());
     }
 
+    @PatchMapping("/approve/{id}")
+    public ResponseEntity<Reservation> approveReservationById(@PathVariable Long id) {
+        log.info("Patch Reservation with id {}", id);
+        return ResponseEntity.ok(reservationService.approveReservation(id));
+    }
+
     @PostMapping
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
         log.info("Create Reservation {}", reservation);
@@ -51,4 +57,13 @@ public class ReservationController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(reservationService.updateReservation(id, reservation));
     }
+
+    @DeleteMapping("/cancel/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cancelReservationById(@PathVariable Long id) {
+        log.info("Delete Reservation with id {}", id);
+        reservationService.cancelReservation(id);
+    }
+
+
 }
