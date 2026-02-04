@@ -9,11 +9,8 @@ import java.util.Arrays;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-        Arrays.stream(context.getBeanDefinitionNames()).toList().forEach(System.out::println);
-
-
+    static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 
 }

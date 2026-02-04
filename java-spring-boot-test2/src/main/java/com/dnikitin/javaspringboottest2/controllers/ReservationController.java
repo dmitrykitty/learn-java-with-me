@@ -1,7 +1,9 @@
 package com.dnikitin.javaspringboottest2.controllers;
 
 import com.dnikitin.javaspringboottest2.dto.Reservation;
+import com.dnikitin.javaspringboottest2.services.ReservationFilter;
 import com.dnikitin.javaspringboottest2.services.ReservationService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,9 +32,21 @@ public class ReservationController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Reservation>> getAllReservations() {
+    public ResponseEntity<List<Reservation>> getAllReservations(
+            @RequestParam(name = "roomId", required = false) Long roomId,
+            @RequestParam(name = "userId", required = false) Long userId,
+            @RequestParam(name = "pageSize", required = false) Integer pageSize,
+            @RequestParam(name = "pageNumber", required = false) Integer pageNumber
+    ) {
         log.info("Get all Reservations");
-        return ResponseEntity.ok(reservationService.findAllReservations());
+        return ResponseEntity.ok(reservationService.findAllByFilter(
+                ReservationFilter.builder()
+                        .roomId(roomId)
+                        .userId(userId)
+                        .pageSize(pageSize)
+                        .pageNumber(pageNumber)
+                        .build()));
+
     }
 
     @PatchMapping("/approve/{id}")
@@ -42,7 +56,7 @@ public class ReservationController {
     }
 
     @PostMapping
-    public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+    public ResponseEntity<Reservation> createReservation(@RequestBody @Valid Reservation reservation) {
         log.info("Create Reservation {}", reservation);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header("header", "tests123")
@@ -52,7 +66,7 @@ public class ReservationController {
     @PutMapping("/{id}")
     public ResponseEntity<Reservation> updateReservation(
             @PathVariable Long id,
-            @RequestBody Reservation reservation) {
+            @RequestBody @Valid Reservation reservation) {
         log.info("Update Reservation with id {}", id);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(reservationService.updateReservation(id, reservation));
