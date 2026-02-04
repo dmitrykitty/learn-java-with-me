@@ -4,8 +4,6 @@ import binarytree.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Given the root of a binary tree, determine if it is a valid binary search tree (BST).
@@ -44,16 +42,11 @@ public class LT98_ValidateBinarySearchTree {
                 isValidHelper(node.right, node.val, max);
     }
 
-    public static class NodeConstrains {
-        TreeNode node;
-        long min;
-        long max;
-
-        public NodeConstrains(TreeNode node, long min, long max) {
-            this.node = node;
-            this.min = min;
-            this.max = max;
-        }
+    public static record NodeConstrains(
+            TreeNode node,
+            long min,
+            long max
+    ) {
     }
 
     public boolean isValidBSTIterative(TreeNode root) {
