@@ -19,7 +19,7 @@ package stackheap;
  * - The closest character to the 3rd star is 'd' in "lecod*e". s becomes "lecoe".
  * There are no more stars, so we return "lecoe".
  */
-public class Lt2390_RemovingStarsFromString {
+public class LT2390_RemovingStarsFromString {
     public String removeStars(String s) {
         StringBuilder stack = new StringBuilder();
 
