@@ -1,5 +1,6 @@
 package binarytree.dfs;
 
+import binarytree.DFS_BFS;
 import binarytree.TreeNode;
 
 import java.util.LinkedList;
@@ -23,9 +24,9 @@ public class TreeRunner {
 
         DFS_BFS.stack_dfs_pre_order(root);
 
-        LT101_SymmetricTree task101 = new LT101_SymmetricTree();
-        TreeNode taskRoot = arrayToTree(new Integer[]{2,3,3,4,5,null,4});
-        task101.isSymmetric(taskRoot);
+        System.out.println();
+
+        DFS_BFS.queue_bfs(root);
 
 
 

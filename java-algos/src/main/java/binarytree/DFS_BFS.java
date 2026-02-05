@@ -1,9 +1,9 @@
-package binarytree.dfs;
-
-import binarytree.TreeNode;
+package binarytree;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
 
 
 public class DFS_BFS {
@@ -41,6 +41,8 @@ public class DFS_BFS {
         }
 
         Deque<TreeNode> stack = new ArrayDeque<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.poll();
         stack.push(root);
 
         while (!stack.isEmpty()) {
@@ -53,6 +55,28 @@ public class DFS_BFS {
             }
             if (node.left != null) {
                 stack.push(node.left);
+            }
+        }
+    }
+
+    public static void queue_bfs(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new ArrayDeque<>();
+
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int currentLevel = queue.size();
+            for (int i = 0; i < currentLevel; i++) {
+                TreeNode node = queue.poll();
+                System.out.println(node.val);
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
             }
         }
     }
