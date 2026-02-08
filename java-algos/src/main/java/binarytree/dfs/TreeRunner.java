@@ -2,6 +2,7 @@ package binarytree.dfs;
 
 import binarytree.DFS_BFS;
 import binarytree.TreeNode;
+import binarytree.bfs.LT103_BinaryTreeZigzagLevelOrderTraversal;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -27,6 +28,9 @@ public class TreeRunner {
         System.out.println();
 
         DFS_BFS.queue_bfs(root);
+
+        LT103_BinaryTreeZigzagLevelOrderTraversal task = new LT103_BinaryTreeZigzagLevelOrderTraversal();
+        task.zigzagLevelOrder(arrayToTree(new Integer[]{1,2,3,4,null,null,5}));
 
 
 
