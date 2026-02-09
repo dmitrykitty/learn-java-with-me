@@ -9,6 +9,8 @@ public class HeapTheory {
         Queue<Integer> minHeap = new PriorityQueue<>();
         Queue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder()); //max heap
 
+        Queue<Integer> maxHeap2 = new PriorityQueue<>((x, y) -> y - x);
+
         //dodawanie elementow
         minHeap.add(40);
         minHeap.add(10);

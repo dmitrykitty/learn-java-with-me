@@ -22,7 +22,7 @@ public class LT215_KthLargestElementInArray {
 
         for(int i = 0; i < nums.length; i++){
             heap.add(nums[i]);
-            if(heap.size() == k){
+            if(heap.size() > k){
                 heap.poll();
             }
         }
