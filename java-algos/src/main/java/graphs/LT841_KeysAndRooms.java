@@ -1,8 +1,6 @@
 package graphs;
 
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * There are n rooms labeled from 0 to n - 1 and all the rooms are locked except for room 0.
@@ -61,6 +59,7 @@ public class LT841_KeysAndRooms {
         int roomAmount = rooms.size();
 
         boolean[] visited = new boolean[roomAmount];
+        visited[0] = true;
 
         dfs(0, rooms, visited);
 
@@ -73,13 +72,38 @@ public class LT841_KeysAndRooms {
     }
 
     private void dfs(int room, List<List<Integer>> rooms, boolean[] visited){
-        if(visited[room]){
-            return;
-        }
-        visited[room] = true;
 
         for(int roomKey: rooms.get(room)){
-            dfs(roomKey, rooms, visited);
+            if(!visited[roomKey]){
+                visited[roomKey] = true;
+                dfs(roomKey, rooms, visited);
+            }
+        }
+    }
+
+    public boolean canVisitAllRoomsRec2(List<List<Integer>> rooms) {
+        int roomAmount = rooms.size();
+
+        boolean[] visited = new boolean[roomAmount];
+        visited[0] = true;
+
+        dfs2(0, rooms, visited);
+
+        for(boolean b: visited){
+            if(!b){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void dfs2(int room, List<List<Integer>> rooms, boolean[] visited){
+
+        for(int roomKey: rooms.get(room)){
+            if(!visited[roomKey]){
+                visited[roomKey] = true;
+                dfs(roomKey, rooms, visited);
+            }
         }
     }
 
