@@ -2,10 +2,37 @@ package graphs;
 
 import java.util.*;
 
+/**
+ * A comprehensive utility class for solving graph-based problems on 2D grids.
+ * Provides implementations for reachability, shortest path discovery,
+ * and connected components analysis using DFS and BFS.
+ */
 public class GridProblems {
 
     private static final int[][] DIRS = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
+    /**
+     * Determines if a path exists between two points in a grid using Depth-First Search (DFS).
+     * <p>
+     * The algorithm explores as deep as possible along each branch before backtracking.
+     * It employs in-place modification of the grid to mark visited cells, significantly
+     * reducing memory overhead.
+     * </p>
+     * <b>Algorithm Mechanics:</b>
+     * <ul>
+     * <li>Base cases handle out-of-bounds indices and obstacles (represented by 1).</li>
+     * <li>Visits are recorded by setting the cell value to 1 to prevent infinite recursion.</li>
+     * <li>Recursive calls explore cardinal directions with early exit (short-circuiting)
+     * once the target is found.</li>
+     * </ul>
+     * @param startRow Starting row index.
+     * @param startCol Starting column index.
+     * @param endRow   Target row index.
+     * @param endCol    Target column index.
+     * @param grid      2D matrix where 0 is walkable and 1 is an obstacle/visited.
+     * @return {@code true} if a path exists; {@code false} otherwise.
+     * @implNote Time Complexity: O(N * M), Space Complexity: O(N * M) due to the recursion stack.
+     */
     public boolean isPath(int startRow, int startCol, int endRow, int endCol, int[][] grid) {
         if (startRow < 0 || startRow >= grid.length || startCol < 0 || startCol >= grid[0].length) {
             return false;
@@ -32,6 +59,26 @@ public class GridProblems {
         return false;
     }
 
+    /**
+     * Calculates the minimum number of steps to reach a target using Breadth-First Search (BFS).
+     * <p>
+     * BFS is optimal for finding the shortest path in unweighted graphs as it explores
+     * nodes in layers (level-order traversal).
+     * </p>
+     * <b>Algorithm Mechanics:</b>
+     * <ul>
+     * <li>A {@code Queue} manages the frontier of explored cells.</li>
+     * <li>A {@code visited} boolean matrix prevents cycles without modifying input data.</li>
+     * <li>The first time the target is reached, the distance is guaranteed to be minimal.</li>
+     * </ul>
+     * @param grid     The 2D environment.
+     * @param startRow Starting row index.
+     * @param startCol Starting column index.
+     * @param endRow   Target row index.
+     * @param endCol    Target column index.
+     * @return The number of edges in the shortest path, or -1 if unreachable.
+     * @implNote Time Complexity: O(N * M), Space Complexity: O(N * M) to store the queue.
+     */
     public int lengthOfShortestPath(int[][] grid, int startRow, int startCol, int endRow, int endCol) {
         if (startRow < 0 || startCol < 0 || startRow >= grid.length || startCol >= grid[0].length ||
                 grid[startRow][startCol] == 1) {
@@ -72,6 +119,21 @@ public class GridProblems {
     }
 
 
+    /**
+     * Finds and reconstructs the full shortest path between two points.
+     * <p>
+     * Extends the standard BFS by utilizing a parent-tracking mechanism to reconstruct
+     * the sequence of coordinates from destination back to source.
+     * </p>
+     * <b>Algorithm Mechanics:</b>
+     * <ul>
+     * <li>A 3D array {@code parents[row][col][2]} stores the coordinates of the node
+     * from which each cell was first visited.</li>
+     * <li>Once the target is found, {@link #getPath} traverses these pointers backward.</li>
+     * </ul>
+     * @return A {@code List} of {@code int[]} coordinates representing the path,
+     * or an empty list if no path exists.
+     */
     public List<int[]> findShortestPath(int[][] grid, int startRow, int startCol, int endRow, int endCol) {
         if (startRow < 0 || startCol < 0 || startRow >= grid.length || startCol >= grid[0].length ||
                 grid[startRow][startCol] == 1) {
@@ -118,6 +180,13 @@ public class GridProblems {
         return getPath(parents, endRow, endCol);
     }
 
+    /**
+     * Performs a backtracking traversal from the end coordinate to the start using the parent map.
+     * @param parentMap 3D array storing predecessor coordinates.
+     * @param row       Final row index.
+     * @param col       Final column index.
+     * @return Reconstructed path in source-to-destination order.
+     */
     private List<int[]> getPath(int[][][] parentMap, int row, int col) {
         List<int[]> path = new ArrayList<>();
 
@@ -129,6 +198,49 @@ public class GridProblems {
             col = prev[1];
         }
         return path.reversed();
+    }
+
+    /**
+     * Identifies the number of distinct connected components (islands) in a binary grid.
+     * <p>
+     * This problem is solved using the "Sink Island" technique. For every unvisited land
+     * cell (1), it triggers a Flood Fill (DFS) to recursively convert all connected land
+     * into water (0).
+     * </p>
+     * @param grid 2D matrix where 1 represents land and 0 represents water.
+     * @return The total count of islands discovered.
+     * @implNote Time Complexity: O(R * C), Space Complexity: O(R * C) in the worst case
+     * for the recursion stack.
+     */
+    public int getNumberOfIslands(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+
+        int count = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1) {
+                    count++;
+                    fillIsland(grid, i, j);
+                }
+            }
+        }
+        return count;
+
+    }
+
+    private void fillIsland(int[][] grid, int row, int col) {
+        if (row < 0 || row >= grid.length || col < 0 || col >= grid[0].length ||  grid[row][col] == 0) {
+            return;
+        }
+
+        grid[row][col] = 0;
+        for(int[] dir : DIRS) {
+            int newRow = row + dir[0];
+            int newCol = col + dir[1];
+
+            fillIsland(grid, newRow, newCol);
+        }
     }
 }
 
