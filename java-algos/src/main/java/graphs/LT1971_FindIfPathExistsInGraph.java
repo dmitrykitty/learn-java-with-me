@@ -99,4 +99,55 @@ public class LT1971_FindIfPathExistsInGraph {
         }
         return false;
     }
+
+
+    private static class DSU{
+        int[] parent;
+        int[] rank;
+
+        public DSU(int n){
+            parent = new int[n];
+            rank = new int[n];
+
+            for(int i = 0; i < n; i++){
+                makeSet(i);
+            }
+        }
+
+        public void makeSet(int v){
+            parent[v] = v;
+            rank[v] = 0;
+        }
+
+        public int findSet(int v){
+            if(parent[v] == v){
+                return v;
+            }
+            return parent[v] = findSet(parent[v]);
+        }
+
+        public void unionSets(int a, int b){
+            a = findSet(a);
+            b = findSet(b);
+
+            if(a != b){
+                if(rank[a] < rank[b]){
+                    parent[a] = b;
+                } else if (rank[a] > rank[b]){
+                    parent[b] = a;
+                } else {
+                    parent[b] = a;
+                    rank[a]++;
+                }
+            }
+        }
+    }
+    public boolean validPath(int n, int[][] edges, int source, int destination) {
+        DSU dsu = new DSU(n);
+        for(int[] pair : edges){
+            dsu.unionSets(pair[0], pair[1]);
+        }
+
+        return dsu.findSet(source) == dsu.findSet(destination);
+    }
 }
