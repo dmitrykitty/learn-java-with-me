@@ -2,16 +2,15 @@ package dropbox;
 
 import java.util.ArrayDeque;
 import java.util.BitSet;
-import java.util.LinkedList;
 import java.util.Queue;
 
-public class IdAllocatorMemoryEfficient {
+public class IdAllocatorMemoryEfficientMix {
     private final BitSet allocated;
     private final Queue<Integer> realisedIds;
     private final int maxVal;
     private int nextId;
 
-    public IdAllocatorMemoryEfficient(int maxVal) {
+    public IdAllocatorMemoryEfficientMix(int maxVal) {
         this.maxVal = maxVal;
         allocated = new BitSet(maxVal);
         realisedIds = new ArrayDeque<>(maxVal);
@@ -28,7 +27,7 @@ public class IdAllocatorMemoryEfficient {
         } else {
             return -1;
         }
-        allocated.set(id);
+        allocated.clear(id);
         return id;
     }
 
