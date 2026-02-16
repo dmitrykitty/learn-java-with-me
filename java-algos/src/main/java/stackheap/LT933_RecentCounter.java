@@ -26,10 +26,10 @@ import java.util.Deque;
  * recentCounter.ping(3001);  // requests = [1, 100, 3001], range is [1,3001], return 3
  * recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002], range is [2,3002], return 3
  */
-public class LT903_RecentCounter {
+public class LT933_RecentCounter {
 
     Deque<Integer> window;
-    public LT903_RecentCounter() {
+    public LT933_RecentCounter() {
         window = new ArrayDeque<>();
     }
 
@@ -42,7 +42,7 @@ public class LT903_RecentCounter {
     }
 
     static void main() {
-        LT903_RecentCounter recentCounter = new LT903_RecentCounter();
+        LT933_RecentCounter recentCounter = new LT933_RecentCounter();
 
         System.out.println(recentCounter.ping(1));
         System.out.println(recentCounter.ping(100));
