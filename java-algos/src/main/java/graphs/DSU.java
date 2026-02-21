@@ -20,11 +20,13 @@ public class DSU {
         if(parent[v] == v) {
             return v;
         }
-//        int cur = v;
-//        while(cur != parent[v]){
-//            cur = parent[cur];
+//        int root = v;
+//        while (parent[root] != root) root = parent[root];
+//        while (parent[v] != v) {
+//            int next = parent[v];
+//            parent[v] = root; // Every node on the path now points to the root
+//            v = next;
 //        }
-//        parent[v] = cur;
 
         return parent[v] = find_set(parent[v]);
     }
