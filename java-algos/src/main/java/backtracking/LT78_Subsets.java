@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LT78_Subsets {
+
+    //================================================================
+    //                         BACKTRACKING
+    //================================================================
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         backtrack(result, new ArrayList<>(), nums, 0);
         return result;
-
     }
 
     private void backtrack(List<List<Integer>> result, List<Integer> acc, int[] nums, int index){
+        if(index > nums.length){
+            return;
+        }
         result.add(new ArrayList<>(acc));
         for(int i = index; i < nums.length; i++){
             acc.add(nums[i]);
@@ -20,9 +26,9 @@ public class LT78_Subsets {
         }
     }
 
-    /**
-     *bit mask solution
-     */
+    //================================================================
+    //                       BIT MANIPULATION
+    //================================================================
     public List<List<Integer>> subsetsBinaryMask(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         int n = nums.length;
