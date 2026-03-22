@@ -61,12 +61,11 @@ public class NinjaTraining {
             tab[1][1] = Math.max(tab[0][0], tab[0][2]) + points[i][1];
             tab[1][2] = Math.max(tab[0][0], tab[0][1]) + points[i][2];
 
-            tab[0][0] = tab[1][0];
-            tab[0][1] = tab[1][1];
-            tab[0][2] = tab[1][2];
+            int[] temp = tab[0];
+            tab[0] = tab[1];
+            tab[1] = temp;
         }
-
-        return Math.max(Math.max(tab[1][0], tab[1][1]), tab[1][2]);
+        return Math.max(Math.max(tab[0][0], tab[0][1]), tab[0][2]);
     }
 
     static void main() {
