@@ -1,8 +1,10 @@
 package dp;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-public class LT746_MinCostClimbingStairs {
+public class LT746_MinCostClimbingStairs{
     public int minCostClimbingStairsMem(int[] cost) {
         int n = cost.length;
         int[] mem = new int[n + 1];
@@ -46,5 +48,35 @@ public class LT746_MinCostClimbingStairs {
             b = temp;
         }
         return b;
+    }
+
+    public String longestCommonPref(String[] strs){
+        StringBuilder sb = new StringBuilder();
+
+        int idx = 0;
+        boolean allTheSame = true;
+
+        while(allTheSame){
+            char curChar = strs[0].charAt(idx);
+            for(int i = 1; i < strs.length; i++){
+                if(idx >= strs[i].length() || curChar != strs[i].charAt(idx)){
+                    allTheSame = false;
+                    break;
+                }
+            }
+            if(allTheSame){
+                idx++;
+                sb.append(curChar);
+            }
+        }
+
+
+        return sb.toString();
+    }
+
+    static void main() {
+        LT746_MinCostClimbingStairs obj = new LT746_MinCostClimbingStairs();
+
+        System.out.println(obj.longestCommonPref(new String[]{"test", "test1", "tes"}));
     }
 }
